@@ -23,14 +23,6 @@ const coreTechnologies = [
   "GCP",
 ] as const;
 
-const achievements = [
-  "Codeforces Specialist (1431) — 1000+ problems solved (theviz)",
-  "ICPC — AIR 129 (Amritapuri Preliminary; qualified for Regionals), AIR 64 (Amritapuri Regional 2022)",
-  "Hackathons — Winner (Azadi ka Amrut Mohatsav Hackathon 2022) for Parivartan; 2nd Prize (HackNUthon, Nirma University)",
-  "Funding — SSIP 2.0 grant ₹88,250 for Parivartan",
-  "Odoo Hackathon ’25 — Winner (GlobeTrotter) among 19,000 teams, ₹1,50,000",
-] as const;
-
 type Role = {
   company: string;
   title: string;
@@ -152,14 +144,6 @@ export default function AboutPage() {
               </span>
             ))}
           </div>
-        </Section>
-
-        <Section title="Achievements">
-          <ul className="list-disc space-y-2 pl-5">
-            {achievements.map((a) => (
-              <li key={a}>{a}</li>
-            ))}
-          </ul>
         </Section>
 
         <Section title="Experience">
