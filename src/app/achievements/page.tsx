@@ -138,22 +138,22 @@ function Icon({ variant }: Readonly<{ variant: Achievement["variant"] }>) {
 
 function Tag({ children }: Readonly<{ children: string }>) {
   return (
-    <span className="rounded-full border border-zinc-200/80 bg-white px-2.5 py-1 text-[11px] leading-none text-zinc-600 dark:border-zinc-800/70 dark:bg-black dark:text-zinc-400">
+    <span className="rounded-full border-2 border-[var(--nb-border)] bg-[var(--nb-surface)] px-2.5 py-1 text-[11px] font-semibold leading-none text-[var(--nb-text)]">
       {children}
     </span>
   );
 }
 
-function accentClasses(variant: Achievement["variant"]) {
+function accentBg(variant: Achievement["variant"]) {
   switch (variant) {
     case "cp":
-      return "from-sky-500/15 via-transparent to-transparent dark:from-sky-400/15";
+      return "bg-sky-300";
     case "icpc":
-      return "from-violet-500/15 via-transparent to-transparent dark:from-violet-400/15";
+      return "bg-violet-300";
     case "hackathon":
-      return "from-emerald-500/15 via-transparent to-transparent dark:from-emerald-400/15";
+      return "bg-emerald-300";
     case "funding":
-      return "from-amber-500/15 via-transparent to-transparent dark:from-amber-400/15";
+      return "bg-amber-300";
   }
 }
 
@@ -161,32 +161,32 @@ export default function AchievementsPage() {
   return (
     <main className="mx-auto w-full max-w-5xl px-6 py-12">
       <div className="max-w-2xl">
-        <h1 className="text-3xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">
+        <h1 className="text-3xl font-extrabold tracking-tight text-[var(--nb-text)]">
           Achievements.
         </h1>
-        <p className="mt-4 text-sm leading-7 text-zinc-700 dark:text-zinc-300">
+        <p className="mt-4 text-sm leading-7 text-[var(--nb-muted)]">
           A few milestones from competitive programming, hackathons, and building
           in public.
         </p>
       </div>
 
-      <section className="mt-10 border-t border-zinc-200/60 pt-10 dark:border-zinc-800/60">
+      <section className="mt-10 border-t-2 border-[var(--nb-border)] pt-10">
         <dl className="grid gap-3 sm:grid-cols-3">
-          <div className="rounded-xl border border-zinc-200/70 bg-white p-4 dark:border-zinc-800/60 dark:bg-black">
-            <dt className="text-xs text-zinc-500 dark:text-zinc-400">CF</dt>
-            <dd className="mt-1 text-sm font-medium text-zinc-950 dark:text-zinc-50">
+          <div className="rounded-2xl border-2 border-[var(--nb-border)] bg-[var(--nb-surface)] p-4 shadow-[6px_6px_0_0_var(--nb-shadow)]">
+            <dt className="text-xs font-semibold text-[var(--nb-muted)]">CF</dt>
+            <dd className="mt-1 text-sm font-extrabold text-[var(--nb-text)]">
               Specialist · 1431
             </dd>
           </div>
-          <div className="rounded-xl border border-zinc-200/70 bg-white p-4 dark:border-zinc-800/60 dark:bg-black">
-            <dt className="text-xs text-zinc-500 dark:text-zinc-400">ICPC</dt>
-            <dd className="mt-1 text-sm font-medium text-zinc-950 dark:text-zinc-50">
+          <div className="rounded-2xl border-2 border-[var(--nb-border)] bg-[var(--nb-surface)] p-4 shadow-[6px_6px_0_0_var(--nb-shadow)]">
+            <dt className="text-xs font-semibold text-[var(--nb-muted)]">ICPC</dt>
+            <dd className="mt-1 text-sm font-extrabold text-[var(--nb-text)]">
               AIR 129 · AIR 64
             </dd>
           </div>
-          <div className="rounded-xl border border-zinc-200/70 bg-white p-4 dark:border-zinc-800/60 dark:bg-black">
-            <dt className="text-xs text-zinc-500 dark:text-zinc-400">Wins</dt>
-            <dd className="mt-1 text-sm font-medium text-zinc-950 dark:text-zinc-50">
+          <div className="rounded-2xl border-2 border-[var(--nb-border)] bg-[var(--nb-accent)] p-4 shadow-[6px_6px_0_0_var(--nb-shadow)]">
+            <dt className="text-xs font-semibold text-[var(--nb-text)]">Wins</dt>
+            <dd className="mt-1 text-sm font-extrabold text-[var(--nb-text)]">
               Hackathons + Funding
             </dd>
           </div>
@@ -197,30 +197,29 @@ export default function AchievementsPage() {
             <li
               key={a.title}
               className={[
-                "group relative overflow-hidden rounded-2xl border border-zinc-200/70 bg-white p-5 transition-all",
-                "hover:-translate-y-0.5 hover:border-zinc-300/80 hover:shadow-sm",
-                "dark:border-zinc-800/60 dark:bg-black dark:hover:border-zinc-700/70",
+                "group relative overflow-hidden rounded-2xl border-2 border-[var(--nb-border)] bg-[var(--nb-surface)] p-5 transition-transform",
+                "shadow-[6px_6px_0_0_var(--nb-shadow)] hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[7px_7px_0_0_var(--nb-shadow)]",
               ].join(" ")}
             >
-              <div
-                className={[
-                  "pointer-events-none absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity",
-                  "group-hover:opacity-100",
-                  accentClasses(a.variant),
-                ].join(" ")}
-              />
               <div className="relative">
+                <div
+                  className={[
+                    "absolute -left-10 -top-10 h-24 w-24 rotate-12 rounded-2xl border-2 border-[var(--nb-border)]",
+                    accentBg(a.variant),
+                  ].join(" ")}
+                  aria-hidden="true"
+                />
                 <div className="flex items-start justify-between gap-4">
-                  <p className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
+                  <p className="text-sm font-extrabold text-[var(--nb-text)]">
                     {a.title}
                   </p>
-                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-zinc-200/80 bg-white text-zinc-700 dark:border-zinc-800/70 dark:bg-black dark:text-zinc-200">
+                  <span className="relative inline-flex h-9 w-9 items-center justify-center rounded-full border-2 border-[var(--nb-border)] bg-[var(--nb-accent)] text-[var(--nb-text)] shadow-[3px_3px_0_0_var(--nb-shadow)]">
                     <Icon variant={a.variant} />
                   </span>
                 </div>
-              <p className="mt-1 text-sm leading-7 text-zinc-700 dark:text-zinc-300">
-                {a.detail}
-              </p>
+                <p className="mt-2 text-sm leading-7 text-[var(--nb-muted)]">
+                  {a.detail}
+                </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {a.tags.map((t) => (
                     <Tag key={t}>{t}</Tag>

@@ -1,25 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Neo-brutalism (light-only) */
+  --nb-bg: #faf8f1;
+  --nb-surface: #ffffff;
+  --nb-text: #121212;
+  --nb-muted: #3a3a3a;
+  --nb-border: #121212;
+  --nb-accent: #ffd400;
+  --nb-shadow: #121212;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--nb-bg);
+  --color-foreground: var(--nb-text);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background: var(--nb-bg);
+  color: var(--nb-text);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
+::selection {
+  background: var(--nb-accent);
+  color: var(--nb-text);
 }

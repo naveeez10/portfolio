@@ -83,11 +83,11 @@ function Section({
   children,
 }: Readonly<{ title: string; children: React.ReactNode }>) {
   return (
-    <section className="border-t border-zinc-200/60 pt-10 dark:border-zinc-800/60">
-      <h2 className="text-sm font-medium tracking-tight text-zinc-950 dark:text-zinc-50">
+    <section className="rounded-2xl border-2 border-[var(--nb-border)] bg-[var(--nb-surface)] p-6 shadow-[6px_6px_0_0_var(--nb-shadow)]">
+      <h2 className="text-sm font-extrabold tracking-tight text-[var(--nb-text)]">
         {title}
       </h2>
-      <div className="mt-4 text-sm leading-7 text-zinc-700 dark:text-zinc-300">
+      <div className="mt-4 text-sm leading-7 text-[var(--nb-muted)]">
         {children}
       </div>
     </section>
@@ -98,14 +98,15 @@ export default function AboutPage() {
   return (
     <main className="mx-auto w-full max-w-5xl px-6 py-12">
       <div className="max-w-2xl">
-        <h1 className="text-3xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">
+        <h1 className="text-3xl font-extrabold tracking-tight text-[var(--nb-text)]">
           About Me.
         </h1>
-        <p className="mt-4 text-base leading-7 text-zinc-700 dark:text-zinc-300">
-          Software Engineer building reliable, user-first products across mobile
-          and web.
-        </p>
-        <p className="mt-4 text-sm leading-7 text-zinc-700 dark:text-zinc-300">
+        <div className="mt-5 inline-flex items-center gap-2 rounded-full border-2 border-[var(--nb-border)] bg-[var(--nb-accent)] px-3 py-1 text-xs font-extrabold text-[var(--nb-text)] shadow-[3px_3px_0_0_var(--nb-shadow)]">
+          <span>Software Engineer</span>
+          <span className="opacity-80">·</span>
+          <span>Mobile + Web</span>
+        </div>
+        <p className="mt-5 text-sm leading-7 text-[var(--nb-muted)]">
           I enjoy taking ideas from zero-to-one and scaling them—shipping
           polished Flutter experiences, building TypeScript web apps, and
           integrating GenAI where it genuinely improves safety and UX. I care
@@ -114,21 +115,21 @@ export default function AboutPage() {
         </p>
       </div>
 
-      <div className="mt-12 grid gap-10">
+      <div className="mt-10 grid gap-6">
         <Section title="Connect">
           <ul className="flex flex-wrap gap-x-4 gap-y-2">
             {connectLinks.map((l) => (
               <li key={l.label}>
                 <a
                   href={l.href}
-                  className="text-zinc-950 underline decoration-zinc-300 underline-offset-4 hover:decoration-zinc-500 dark:text-zinc-50 dark:decoration-zinc-700 dark:hover:decoration-zinc-400"
+                  className="font-bold underline decoration-[var(--nb-border)] underline-offset-4"
                 >
                   {l.label}
                 </a>
               </li>
             ))}
           </ul>
-          <p className="mt-3 text-xs text-zinc-500 dark:text-zinc-400">
+          <p className="mt-3 text-xs text-[var(--nb-muted)]">
             Replace the “#” links with your real URLs.
           </p>
         </Section>
@@ -138,7 +139,7 @@ export default function AboutPage() {
             {coreTechnologies.map((t) => (
               <span
                 key={t}
-                className="rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs text-zinc-700 dark:border-zinc-800 dark:bg-black dark:text-zinc-300"
+                className="rounded-full border-2 border-[var(--nb-border)] bg-[var(--nb-surface)] px-3 py-1 text-xs font-semibold text-[var(--nb-text)]"
               >
                 {t}
               </span>
@@ -151,15 +152,15 @@ export default function AboutPage() {
             {roles.map((r) => (
               <article key={`${r.company}-${r.title}`} className="space-y-2">
                 <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-                  <h3 className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
+                  <h3 className="text-sm font-extrabold text-[var(--nb-text)]">
                     {r.company} — {r.title}
                   </h3>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                  <p className="text-xs font-semibold text-[var(--nb-muted)]">
                     {r.dates}
                   </p>
                 </div>
                 {r.stack ? (
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                  <p className="text-xs text-[var(--nb-muted)]">
                     {r.stack}
                   </p>
                 ) : null}
@@ -175,10 +176,10 @@ export default function AboutPage() {
 
         <Section title="Education">
           <div className="space-y-1">
-            <p className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
+            <p className="text-sm font-extrabold text-[var(--nb-text)]">
               L.D. College of Engineering — B.E. (IT), CGPA 8.67
             </p>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400">
+            <p className="text-xs text-[var(--nb-muted)]">
               Aug 2020 — May 2024 · Ahmedabad, Gujarat
             </p>
           </div>
