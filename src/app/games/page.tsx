@@ -1,12 +1,8 @@
-import { PlaceholderPage } from "@/components/PlaceholderPage";
+import { redirect } from "next/navigation";
 
 export default function GamesPage() {
-  return (
-    <PlaceholderPage
-      title="Games."
-      description="Small experiments and playful builds. Coming soon."
-    />
-  );
+  redirect("/achievements");
 }
+
 
 

@@ -7,7 +7,7 @@ const links = [
   { href: "/about", label: "About" },
   { href: "/projects", label: "Projects" },
   { href: "/ramblings", label: "Ramblings" },
-  { href: "/games", label: "Games" },
+  { href: "/achievements", label: "Achievements" },
 ] as const;
 
 function isActive(pathname: string, href: string) {
@@ -39,5 +39,6 @@ export function SiteNav() {
     </nav>
   );
 }
+
 
 
