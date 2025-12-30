@@ -1,7 +1,7 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { HeroGraphic } from "@/components/HeroGraphic";
 
 export default function Home() {
   return (
@@ -42,7 +42,15 @@ export default function Home() {
             <div className="absolute -right-10 -top-10 h-32 w-32 rounded-3xl border-2 border-white bg-[var(--nb-accent)] opacity-90" />
             <div className="absolute -bottom-10 -left-10 h-24 w-24 rounded-3xl border-2 border-white bg-white/10" />
             <div className="relative rounded-3xl border-2 border-white bg-white/5 p-6 shadow-[10px_10px_0_0_white]">
-              <HeroGraphic className="hero-float h-auto w-full" />
+              <Image
+                src="/sisyphus.gif"
+                alt="Sisyphus loop"
+                width={900}
+                height={900}
+                priority
+                unoptimized
+                className="hero-float h-auto w-full select-none"
+              />
             </div>
           </div>
           </div>
