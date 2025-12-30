@@ -5,9 +5,10 @@ import { HeroGraphic } from "@/components/HeroGraphic";
 
 export default function Home() {
   return (
-    <main className="mx-auto w-full max-w-5xl px-6 py-10">
-      <section className="relative overflow-hidden rounded-3xl border-2 border-[var(--nb-border)] bg-black p-8 text-white shadow-[10px_10px_0_0_var(--nb-shadow)] sm:p-12">
-        <div className="grid items-center gap-10 lg:grid-cols-2">
+    <main className="w-full">
+      <section className="relative w-full overflow-hidden border-y-2 border-[var(--nb-border)] bg-black text-white">
+        <div className="mx-auto w-full max-w-7xl px-6 py-12 sm:px-10 sm:py-16">
+          <div className="grid items-center gap-10 lg:grid-cols-2">
           <div>
             <p className="text-xs font-extrabold tracking-widest text-white/70">
               NAVIZ KHOJA
@@ -43,6 +44,7 @@ export default function Home() {
             <div className="relative rounded-3xl border-2 border-white bg-white/5 p-6 shadow-[10px_10px_0_0_white]">
               <HeroGraphic className="hero-float h-auto w-full" />
             </div>
+          </div>
           </div>
         </div>
 
