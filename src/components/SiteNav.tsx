@@ -27,11 +27,10 @@ export function SiteNav() {
             key={l.href}
             href={l.href}
             className={[
-              "rounded-md border-2 px-2.5 py-1 font-bold transition-transform",
-              "shadow-[3px_3px_0_0_var(--nb-shadow)] hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[4px_4px_0_0_var(--nb-shadow)]",
-              active
-                ? "border-[var(--nb-border)] bg-[var(--nb-accent)] text-[var(--nb-text)]"
-                : "border-[var(--nb-border)] bg-[var(--nb-surface)] text-[var(--nb-text)]",
+              "rounded-md border-2 px-2.5 py-1 font-extrabold transition-transform",
+              "border-white bg-[var(--nb-accent)] text-white",
+              "shadow-[3px_3px_0_0_#fff] hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[4px_4px_0_0_#fff]",
+              active ? "opacity-100" : "opacity-90 hover:opacity-100",
             ].join(" ")}
           >
             {l.label}

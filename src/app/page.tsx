@@ -27,13 +27,13 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="#about"
-                className="inline-flex items-center gap-2 rounded-xl border-2 border-[var(--nb-border)] bg-[var(--nb-accent)] px-4 py-2 text-sm font-extrabold text-[var(--nb-text)] shadow-[5px_5px_0_0_var(--nb-shadow)] transition-transform hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[6px_6px_0_0_var(--nb-shadow)]"
+                className="inline-flex items-center gap-2 rounded-xl border-2 border-white bg-[var(--nb-accent)] px-4 py-2 text-sm font-extrabold text-white shadow-[5px_5px_0_0_#fff] transition-transform hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[6px_6px_0_0_#fff]"
               >
                 About me <span aria-hidden="true">↗</span>
               </Link>
               <Link
                 href="#projects"
-                className="inline-flex items-center gap-2 rounded-xl border-2 border-[var(--nb-border)] bg-white px-4 py-2 text-sm font-extrabold text-[var(--nb-text)] shadow-[5px_5px_0_0_var(--nb-shadow)] transition-transform hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[6px_6px_0_0_var(--nb-shadow)]"
+                className="inline-flex items-center gap-2 rounded-xl border-2 border-white bg-[var(--nb-accent)] px-4 py-2 text-sm font-extrabold text-white shadow-[5px_5px_0_0_#fff] transition-transform hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[6px_6px_0_0_#fff]"
               >
                 View projects <span aria-hidden="true">↗</span>
               </Link>

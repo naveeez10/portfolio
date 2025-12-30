@@ -101,7 +101,7 @@ export function AboutSection() {
         <h2 className="text-3xl font-extrabold tracking-tight text-[var(--nb-text)]">
           About Me.
         </h2>
-        <div className="mt-5 inline-flex items-center gap-2 rounded-full border-2 border-[var(--nb-border)] bg-[var(--nb-accent)] px-3 py-1 text-xs font-extrabold text-[var(--nb-text)] shadow-[3px_3px_0_0_var(--nb-shadow)]">
+        <div className="mt-5 inline-flex items-center gap-2 rounded-full border-2 border-[var(--nb-border)] bg-[var(--nb-accent)] px-3 py-1 text-xs font-extrabold text-white shadow-[3px_3px_0_0_var(--nb-shadow)]">
           <span>Software Engineer</span>
           <span className="opacity-80">·</span>
           <span>Mobile + Web</span>
