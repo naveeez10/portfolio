@@ -1,12 +1,7 @@
-import { PlaceholderPage } from "@/components/PlaceholderPage";
+import { redirect } from "next/navigation";
 
 export default function ProjectsPage() {
-  return (
-    <PlaceholderPage
-      title="Projects."
-      description="A curated list of things I’ve built. Coming soon."
-    />
-  );
+  redirect("/#projects");
 }
 
 

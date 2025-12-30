@@ -1,12 +1,7 @@
-import { PlaceholderPage } from "@/components/PlaceholderPage";
+import { redirect } from "next/navigation";
 
 export default function RamblingsPage() {
-  return (
-    <PlaceholderPage
-      title="Ramblings."
-      description="Short notes, write-ups, and lessons learned. Coming soon."
-    />
-  );
+  redirect("/#ramblings");
 }
 
 

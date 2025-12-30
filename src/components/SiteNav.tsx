@@ -4,14 +4,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const links = [
-  { href: "/about", label: "About" },
-  { href: "/projects", label: "Projects" },
-  { href: "/ramblings", label: "Ramblings" },
-  { href: "/achievements", label: "Achievements" },
+  { href: "/#about", label: "About" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#ramblings", label: "Ramblings" },
+  { href: "/#achievements", label: "Achievements" },
 ] as const;
 
 function isActive(pathname: string, href: string) {
-  return pathname === href || pathname.startsWith(`${href}/`);
+  const base = href.split("#")[0] || "/";
+  return pathname === base || pathname.startsWith(`${base}/`);
 }
 
 export function SiteNav() {

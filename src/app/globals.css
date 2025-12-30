@@ -2,19 +2,13 @@
 
 :root {
   /* Neo-brutalism (light-only) */
-  /* Warm palette to match sisyphus.gif */
-  --nb-bg: #f4efe6;
-  --nb-surface: #fff7ee;
-  --nb-text: #1a0f0a;
-  --nb-muted: #4b3a2f;
-  --nb-border: #1a0f0a;
-  --nb-accent: #c7782c; /* warm orange */
-  --nb-shadow: #1a0f0a;
-
-  /* Landing hero */
-  --hero-bg: #140b07; /* deep brown-black */
-  --hero-fg: #f6efe6; /* warm off-white */
-  --hero-border: #f6efe6;
+  --nb-bg: #faf8f1;
+  --nb-surface: #ffffff;
+  --nb-text: #121212;
+  --nb-muted: #3a3a3a;
+  --nb-border: #121212;
+  --nb-accent: #ffd400;
+  --nb-shadow: #121212;
 }
 
 @theme inline {
@@ -27,6 +21,11 @@
 body {
   background: var(--nb-bg);
   color: var(--nb-text);
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 17px;
 }
 
 ::selection {
