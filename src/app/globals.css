@@ -2,12 +2,12 @@
 
 :root {
   /* Neo-brutalism (light-only) */
-  --nb-bg: #faf8f1;
+  --nb-bg: #ffffff;
   --nb-surface: #ffffff;
   --nb-text: #121212;
-  --nb-muted: #3a3a3a;
+  --nb-muted: #3f3f46;
   --nb-border: #121212;
-  --nb-accent: #ffd400;
+  --nb-accent: #2563eb;
   --nb-shadow: #121212;
 }
 
