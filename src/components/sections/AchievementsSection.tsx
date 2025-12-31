@@ -1,3 +1,7 @@
+import Image from "next/image";
+import Link from "next/link";
+import { AchievementsPhotoCarousel } from "@/components/AchievementsPhotoCarousel";
+
 type Achievement = {
   title: string;
   detail: string;
@@ -137,96 +141,255 @@ function Icon({ variant }: Readonly<{ variant: Achievement["variant"] }>) {
 
 function Tag({ children }: Readonly<{ children: string }>) {
   return (
-    <span className="rounded-full border-2 border-[var(--nb-border)] bg-[var(--nb-surface)] px-2.5 py-1 text-[11px] font-semibold leading-none text-[var(--nb-text)]">
+    <span className="rounded-full border-2 border-[var(--nb-border)] bg-[var(--nb-surface)] px-3 py-1 text-xs font-semibold leading-none text-[var(--nb-text)] transition-colors group-hover:bg-[var(--nb-accent-soft)]">
       {children}
     </span>
   );
 }
 
-function accentBg(variant: Achievement["variant"]) {
+type Stat = {
+  label: string;
+  value: string;
+  hint: string;
+  tone: "surface" | "accent";
+};
+
+const stats: readonly Stat[] = [
+  {
+    label: "Codeforces",
+    value: "Specialist · 1431",
+    hint: "theviz · 1000+ problems solved",
+    tone: "surface",
+  },
+  {
+    label: "ICPC",
+    value: "AIR 129 · AIR 64",
+    hint: "Amritapuri Preliminary + Regionals (2022)",
+    tone: "surface",
+  },
+  {
+    label: "Wins",
+    value: "Hackathons + Funding",
+    hint: "Multiple wins · SSIP 2.0 funded",
+    tone: "accent",
+  },
+] as const;
+
+function StatCard({ stat }: Readonly<{ stat: Stat }>) {
+  const base =
+    "rounded-2xl border-2 p-5 shadow-[6px_6px_0_0_var(--nb-shadow)] transition-transform transition-colors";
+  const surface =
+    "border-[var(--nb-border)] bg-[var(--nb-surface)] text-[var(--nb-text)] hover:-translate-x-[1px] hover:-translate-y-[1px] hover:bg-[var(--nb-accent-soft)] hover:shadow-[7px_7px_0_0_var(--nb-shadow)]";
+  const accent =
+    "border-[var(--nb-border)] bg-[var(--nb-accent)] text-white hover:-translate-x-[1px] hover:-translate-y-[1px] hover:brightness-[1.03] hover:shadow-[7px_7px_0_0_var(--nb-shadow)]";
+  return (
+    <div
+      className={[
+        "group",
+        base,
+        stat.tone === "accent" ? accent : surface,
+      ].join(" ")}
+    >
+      <p className="text-xs font-semibold opacity-80">{stat.label}</p>
+      <p className="mt-2 text-lg font-extrabold tracking-tight">{stat.value}</p>
+      <p className="mt-2 text-sm opacity-90">{stat.hint}</p>
+    </div>
+  );
+}
+
+function TimelineDot({
+  variant,
+}: Readonly<{ variant: Achievement["variant"] }>) {
+  const border = "border-[var(--nb-border)]";
   switch (variant) {
     case "cp":
-      return "bg-sky-300";
+      return (
+        <span
+          className={[
+            "relative z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border-2 bg-[var(--nb-surface)] text-[var(--nb-text)]",
+            border,
+            "shadow-[4px_4px_0_0_var(--nb-shadow)]",
+          ].join(" ")}
+        >
+          <Icon variant={variant} />
+        </span>
+      );
     case "icpc":
-      return "bg-violet-300";
+      return (
+        <span
+          className={[
+            "relative z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border-2 bg-[var(--nb-surface)] text-[var(--nb-text)]",
+            border,
+            "shadow-[4px_4px_0_0_var(--nb-shadow)]",
+          ].join(" ")}
+        >
+          <Icon variant={variant} />
+        </span>
+      );
     case "hackathon":
-      return "bg-emerald-300";
+      return (
+        <span
+          className={[
+            "relative z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border-2 bg-[var(--nb-accent)] text-white",
+            border,
+            "shadow-[4px_4px_0_0_var(--nb-shadow)]",
+          ].join(" ")}
+        >
+          <Icon variant={variant} />
+        </span>
+      );
     case "funding":
-      return "bg-amber-300";
+      return (
+        <span
+          className={[
+            "relative z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border-2 bg-[var(--nb-surface)] text-[var(--nb-text)]",
+            border,
+            "shadow-[4px_4px_0_0_var(--nb-shadow)]",
+          ].join(" ")}
+        >
+          <Icon variant={variant} />
+        </span>
+      );
   }
 }
 
+function CodeforcesCard() {
+  return (
+    <Link
+      href="https://codeforces.com/profile/theviz"
+      target="_blank"
+      rel="noreferrer"
+      className="group block rounded-2xl border-2 border-[var(--nb-border)] bg-[var(--nb-surface)] p-6 shadow-[6px_6px_0_0_var(--nb-shadow)] transition-transform transition-colors hover:-translate-x-[1px] hover:-translate-y-[1px] hover:bg-[var(--nb-accent-soft)] hover:shadow-[7px_7px_0_0_var(--nb-shadow)]"
+    >
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+        <h3 className="text-sm font-extrabold text-[var(--nb-text)]">
+          Codeforces activity
+        </h3>
+        <span className="inline-flex w-fit items-center gap-2 rounded-full border-2 border-[var(--nb-border)] bg-white px-3 py-1 text-xs font-bold text-[var(--nb-text)]">
+          Profile <span aria-hidden="true">↗</span>
+        </span>
+      </div>
+
+      <p className="mt-3 text-sm leading-7 text-[var(--nb-muted)]">
+        My peak problem-solving days looked like this.
+      </p>
+
+      <div className="mt-4 overflow-hidden rounded-xl border-2 border-[var(--nb-border)] bg-white shadow-[4px_4px_0_0_var(--nb-shadow)]">
+        <Image
+          src="/codeforces.png"
+          alt="Codeforces activity heatmap snapshot"
+          width={1782}
+          height={372}
+          className="h-auto w-full select-none"
+        />
+      </div>
+
+      <p className="mt-3 text-xs font-semibold text-[var(--nb-muted)]">
+        Handle: <span className="font-bold text-[var(--nb-text)]">theviz</span>
+      </p>
+    </Link>
+  );
+}
+
+const achievementPhotos: readonly string[] = [
+  "/achievments/photo-1.jpg",
+  "/achievments/photo-2.jpg",
+  "/achievments/photo-3.jpg",
+  "/achievments/photo-4.jpg",
+  "/achievments/photo-5.jpg",
+  "/achievments/photo-6.jpg",
+] as const;
+
 export function AchievementsSection() {
   return (
-    <div className="mx-auto w-full max-w-5xl px-6 py-14">
+    <div className="mx-auto w-full max-w-7xl px-6 py-14 sm:px-10">
       <div className="max-w-2xl">
         <h2 className="text-3xl font-extrabold tracking-tight text-[var(--nb-text)]">
           Achievements.
         </h2>
-        <p className="mt-4 text-sm leading-7 text-[var(--nb-muted)]">
-          A few milestones from competitive programming, hackathons, and
-          building in public.
+        <p className="mt-4 text-base leading-8 text-[var(--nb-muted)]">
+          Milestones from competitive programming, hackathons, and shipping
+          products.
         </p>
       </div>
 
       <section className="mt-10 border-t-2 border-[var(--nb-border)] pt-10">
-        <dl className="grid gap-3 sm:grid-cols-3">
-          <div className="rounded-2xl border-2 border-[var(--nb-border)] bg-[var(--nb-surface)] p-4 shadow-[6px_6px_0_0_var(--nb-shadow)]">
-            <dt className="text-xs font-semibold text-[var(--nb-muted)]">CF</dt>
-            <dd className="mt-1 text-sm font-extrabold text-[var(--nb-text)]">
-              Specialist · 1431
-            </dd>
-          </div>
-          <div className="rounded-2xl border-2 border-[var(--nb-border)] bg-[var(--nb-surface)] p-4 shadow-[6px_6px_0_0_var(--nb-shadow)]">
-            <dt className="text-xs font-semibold text-[var(--nb-muted)]">
-              ICPC
-            </dt>
-            <dd className="mt-1 text-sm font-extrabold text-[var(--nb-text)]">
-              AIR 129 · AIR 64
-            </dd>
-          </div>
-          <div className="rounded-2xl border-2 border-[var(--nb-border)] bg-[var(--nb-accent)] p-4 shadow-[6px_6px_0_0_var(--nb-shadow)]">
-            <dt className="text-xs font-semibold text-[var(--nb-text)]">Wins</dt>
-            <dd className="mt-1 text-sm font-extrabold text-[var(--nb-text)]">
-              Hackathons + Funding
-            </dd>
-          </div>
-        </dl>
-
-        <ul className="mt-8 grid gap-4 sm:grid-cols-2">
-          {achievements.map((a) => (
-            <li
-              key={a.title}
-              className="group relative overflow-hidden rounded-2xl border-2 border-[var(--nb-border)] bg-[var(--nb-surface)] p-5 shadow-[6px_6px_0_0_var(--nb-shadow)] transition-transform hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[7px_7px_0_0_var(--nb-shadow)]"
-            >
-              <div className="relative">
-                <div
-                  className={[
-                    "absolute -left-10 -top-10 h-24 w-24 rotate-12 rounded-2xl border-2 border-[var(--nb-border)]",
-                    accentBg(a.variant),
-                  ].join(" ")}
-                  aria-hidden="true"
-                />
-                <div className="flex items-start justify-between gap-4">
-                  <p className="text-sm font-extrabold text-[var(--nb-text)]">
-                    {a.title}
-                  </p>
-                  <span className="relative inline-flex h-9 w-9 items-center justify-center rounded-full border-2 border-[var(--nb-border)] bg-[var(--nb-accent)] text-[var(--nb-text)] shadow-[3px_3px_0_0_var(--nb-shadow)]">
-                    <Icon variant={a.variant} />
-                  </span>
-                </div>
-                <p className="mt-2 text-sm leading-7 text-[var(--nb-muted)]">
-                  {a.detail}
-                </p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {a.tags.map((t) => (
-                    <Tag key={t}>{t}</Tag>
-                  ))}
-                </div>
-              </div>
-            </li>
+        <div className="grid gap-4 lg:grid-cols-3">
+          {stats.map((s) => (
+            <StatCard key={s.label} stat={s} />
           ))}
-        </ul>
+        </div>
+
+        <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_1.2fr] lg:items-start">
+          <div className="space-y-6">
+            <div className="rounded-2xl border-2 border-[var(--nb-border)] bg-[var(--nb-surface)] p-6 shadow-[6px_6px_0_0_var(--nb-shadow)]">
+              <h3 className="text-sm font-extrabold text-[var(--nb-text)]">
+                What I optimize for
+              </h3>
+              <ul className="mt-4 space-y-2 text-sm leading-7 text-[var(--nb-muted)]">
+                <li>
+                  <span className="font-bold text-[var(--nb-text)]">
+                    Consistency:
+                  </span>{" "}
+                  showing up daily and compounding skills.
+                </li>
+                <li>
+                  <span className="font-bold text-[var(--nb-text)]">
+                    Execution:
+                  </span>{" "}
+                  shipping, measuring, iterating.
+                </li>
+                <li>
+                  <span className="font-bold text-[var(--nb-text)]">
+                    Competitive edge:
+                  </span>{" "}
+                  problem solving under constraints.
+                </li>
+              </ul>
+            </div>
+
+            <CodeforcesCard />
+
+            <AchievementsPhotoCarousel images={achievementPhotos} />
+          </div>
+
+          <ol className="relative space-y-4">
+            <div
+              className="absolute left-5 top-0 h-full w-[2px] bg-[var(--nb-border)]"
+              aria-hidden="true"
+            />
+            {achievements.map((a) => (
+              <li
+                key={a.title}
+                className="relative grid grid-cols-[56px_1fr] gap-4"
+              >
+                <div className="flex items-start justify-center pt-1">
+                  <TimelineDot variant={a.variant} />
+                </div>
+
+                <div className="group rounded-2xl border-2 border-[var(--nb-border)] bg-[var(--nb-surface)] p-5 shadow-[6px_6px_0_0_var(--nb-shadow)] transition-transform transition-colors hover:-translate-x-[1px] hover:-translate-y-[1px] hover:bg-[var(--nb-accent-soft)] hover:shadow-[7px_7px_0_0_var(--nb-shadow)]">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                    <p className="text-base font-extrabold text-[var(--nb-text)]">
+                      {a.title}
+                    </p>
+                    <span className="inline-flex w-fit items-center gap-2 rounded-full border-2 border-[var(--nb-border)] bg-white px-3 py-1 text-xs font-bold text-[var(--nb-text)]">
+                      <Icon variant={a.variant} />
+                      <span className="capitalize">{a.variant}</span>
+                    </span>
+                  </div>
+                  <p className="mt-2 text-sm leading-7 text-[var(--nb-muted)]">
+                    {a.detail}
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {a.tags.map((t) => (
+                      <Tag key={t}>{t}</Tag>
+                    ))}
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
       </section>
     </div>
   );

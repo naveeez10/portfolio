@@ -8,6 +8,7 @@
   --nb-muted: #3f3f46;
   --nb-border: #121212;
   --nb-accent: #1475c5;
+  --nb-accent-soft: #e7f2fb;
   --nb-shadow: #121212;
 }
 
@@ -31,6 +32,26 @@ html {
 ::selection {
   background: var(--nb-accent);
   color: var(--nb-text);
+}
+
+/* Subtle fade without introducing a colored overlay */
+.fade-mask-bottom {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 calc(100% - 44px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 calc(100% - 44px),
+    transparent 100%
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
 }
 
 /* Hero graphic animations */
