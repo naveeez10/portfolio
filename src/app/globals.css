@@ -34,6 +34,16 @@ html {
   color: var(--nb-text);
 }
 
+/* Hide scrollbars (use with `no-scrollbar` class) */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
 /* Subtle fade without introducing a colored overlay */
 .fade-mask-bottom {
   -webkit-mask-image: linear-gradient(
