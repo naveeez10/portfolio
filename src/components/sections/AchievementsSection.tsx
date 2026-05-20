@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AchievementsPhotoCarousel } from "@/components/AchievementsPhotoCarousel";
+import { Card } from "@/components/ui/Card";
 
 type Achievement = {
   title: string;
@@ -32,7 +33,7 @@ const achievements: readonly Achievement[] = [
   },
   {
     title: "HackNUthon (Nirma University) — 2nd Prize",
-    detail: "Project: Parivartan.",
+    detail: "Project: Parivartan · 2nd place among 1,000+ participants.",
     tags: ["Hackathon", "2nd Prize"],
     variant: "hackathon",
   },
@@ -45,7 +46,7 @@ const achievements: readonly Achievement[] = [
   },
   {
     title: "Odoo Hackathon 2025 — Winner",
-    detail: "GlobeTrotter · Won among ~19,000 teams · Prize: ₹1,50,000.",
+    detail: "GlobeTrotter · Won among 19,000 teams · Prize: ₹1,50,000.",
     tags: ["Hackathon", "Winner"],
     variant: "hackathon",
   },
@@ -176,90 +177,42 @@ const stats: readonly Stat[] = [
 ] as const;
 
 function StatCard({ stat }: Readonly<{ stat: Stat }>) {
-  const base =
-    "rounded-2xl border-2 p-5 shadow-[6px_6px_0_0_var(--nb-shadow)] transition-transform transition-colors";
-  const surface =
-    "border-[var(--nb-border)] bg-[var(--nb-surface)] text-[var(--nb-text)] hover:-translate-x-[1px] hover:-translate-y-[1px] hover:bg-[var(--nb-accent-soft)] hover:shadow-[7px_7px_0_0_var(--nb-shadow)]";
-  const accent =
-    "border-[var(--nb-border)] bg-[var(--nb-accent)] text-white hover:-translate-x-[1px] hover:-translate-y-[1px] hover:brightness-[1.03] hover:shadow-[7px_7px_0_0_var(--nb-shadow)]";
   return (
-    <div
-      className={[
-        "group",
-        base,
-        stat.tone === "accent" ? accent : surface,
-      ].join(" ")}
-    >
+    <Card tone={stat.tone} interactive className="p-5">
       <p className="text-xs font-semibold opacity-80">{stat.label}</p>
       <p className="mt-2 text-lg font-extrabold tracking-tight">{stat.value}</p>
       <p className="mt-2 text-sm opacity-90">{stat.hint}</p>
-    </div>
+    </Card>
   );
 }
 
 function TimelineDot({
   variant,
 }: Readonly<{ variant: Achievement["variant"] }>) {
-  const border = "border-[var(--nb-border)]";
-  switch (variant) {
-    case "cp":
-      return (
-        <span
-          className={[
-            "relative z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border-2 bg-[var(--nb-surface)] text-[var(--nb-text)]",
-            border,
-            "shadow-[4px_4px_0_0_var(--nb-shadow)]",
-          ].join(" ")}
-        >
-          <Icon variant={variant} />
-        </span>
-      );
-    case "icpc":
-      return (
-        <span
-          className={[
-            "relative z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border-2 bg-[var(--nb-surface)] text-[var(--nb-text)]",
-            border,
-            "shadow-[4px_4px_0_0_var(--nb-shadow)]",
-          ].join(" ")}
-        >
-          <Icon variant={variant} />
-        </span>
-      );
-    case "hackathon":
-      return (
-        <span
-          className={[
-            "relative z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border-2 bg-[var(--nb-accent)] text-white",
-            border,
-            "shadow-[4px_4px_0_0_var(--nb-shadow)]",
-          ].join(" ")}
-        >
-          <Icon variant={variant} />
-        </span>
-      );
-    case "funding":
-      return (
-        <span
-          className={[
-            "relative z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border-2 bg-[var(--nb-surface)] text-[var(--nb-text)]",
-            border,
-            "shadow-[4px_4px_0_0_var(--nb-shadow)]",
-          ].join(" ")}
-        >
-          <Icon variant={variant} />
-        </span>
-      );
-  }
+  const accent = variant === "hackathon";
+  return (
+    <span
+      className={[
+        "relative z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border-2 border-[var(--nb-border)] shadow-[4px_4px_0_0_var(--nb-shadow)]",
+        accent
+          ? "bg-[var(--nb-accent)] text-white"
+          : "bg-[var(--nb-surface)] text-[var(--nb-text)]",
+      ].join(" ")}
+    >
+      <Icon variant={variant} />
+    </span>
+  );
 }
 
 function CodeforcesCard() {
   return (
-    <Link
+    <Card
+      as={Link}
       href="https://codeforces.com/profile/theviz"
       target="_blank"
       rel="noreferrer"
-      className="group block rounded-2xl border-2 border-[var(--nb-border)] bg-[var(--nb-surface)] p-6 shadow-[6px_6px_0_0_var(--nb-shadow)] transition-transform transition-colors hover:-translate-x-[1px] hover:-translate-y-[1px] hover:bg-[var(--nb-accent-soft)] hover:shadow-[7px_7px_0_0_var(--nb-shadow)]"
+      interactive
+      className="block p-6"
     >
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <h3 className="text-sm font-extrabold text-[var(--nb-text)]">
@@ -287,17 +240,19 @@ function CodeforcesCard() {
       <p className="mt-3 text-xs font-semibold text-[var(--nb-muted)]">
         Handle: <span className="font-bold text-[var(--nb-text)]">theviz</span>
       </p>
-    </Link>
+    </Card>
   );
 }
 
-const achievementPhotos: readonly string[] = [
-  "/achievments/photo-1.jpg",
-  "/achievments/photo-2.jpg",
-  "/achievments/photo-3.jpg",
-  "/achievments/photo-4.jpg",
-  "/achievments/photo-5.jpg",
-  "/achievments/photo-6.jpg",
+type AchievementPhoto = { src: string; alt: string };
+
+const achievementPhotos: readonly AchievementPhoto[] = [
+  { src: "/achievements/photo-1.jpg", alt: "Hackathon team celebrating a win on stage" },
+  { src: "/achievements/photo-2.jpg", alt: "ICPC regional round team photo" },
+  { src: "/achievements/photo-3.jpg", alt: "Receiving a hackathon prize" },
+  { src: "/achievements/photo-4.jpg", alt: "Coding during a hackathon" },
+  { src: "/achievements/photo-5.jpg", alt: "Team photo at a hackathon venue" },
+  { src: "/achievements/photo-6.jpg", alt: "Holding a winning prize cheque" },
 ] as const;
 
 export function AchievementsSection() {
@@ -322,7 +277,7 @@ export function AchievementsSection() {
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_1.2fr] lg:items-start">
           <div className="space-y-6">
-            <div className="rounded-2xl border-2 border-[var(--nb-border)] bg-[var(--nb-surface)] p-6 shadow-[6px_6px_0_0_var(--nb-shadow)]">
+            <Card className="p-6">
               <h3 className="text-sm font-extrabold text-[var(--nb-text)]">
                 What I optimize for
               </h3>
@@ -346,7 +301,7 @@ export function AchievementsSection() {
                   problem solving under constraints.
                 </li>
               </ul>
-            </div>
+            </Card>
 
             <CodeforcesCard />
 
@@ -367,7 +322,7 @@ export function AchievementsSection() {
                   <TimelineDot variant={a.variant} />
                 </div>
 
-                <div className="group rounded-2xl border-2 border-[var(--nb-border)] bg-[var(--nb-surface)] p-5 shadow-[6px_6px_0_0_var(--nb-shadow)] transition-transform transition-colors hover:-translate-x-[1px] hover:-translate-y-[1px] hover:bg-[var(--nb-accent-soft)] hover:shadow-[7px_7px_0_0_var(--nb-shadow)]">
+                <Card interactive className="p-5">
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                     <p className="text-base font-extrabold text-[var(--nb-text)]">
                       {a.title}
@@ -385,7 +340,7 @@ export function AchievementsSection() {
                       <Tag key={t}>{t}</Tag>
                     ))}
                   </div>
-                </div>
+                </Card>
               </li>
             ))}
           </ol>

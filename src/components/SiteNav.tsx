@@ -6,7 +6,6 @@ import { useEffect, useMemo, useState } from "react";
 const links = [
   { href: "/#top", label: "Top", id: "top" },
   { href: "/#about", label: "About", id: "about" },
-  { href: "/#projects", label: "Projects", id: "projects" },
   { href: "/#achievements", label: "Achievements", id: "achievements" },
 ] as const;
 
@@ -55,7 +54,7 @@ export function SiteNav() {
     <div className="relative">
       <nav
         aria-label="Primary"
-        className="hidden items-center gap-2 text-sm md:flex"
+        className="hidden items-center gap-2 text-base md:flex"
       >
         {links.map((l) => {
           const isCurrent = active === l.id;

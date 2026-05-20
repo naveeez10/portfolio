@@ -10,9 +10,9 @@ export default function Home() {
     <main className="w-full">
       <section
         id="top"
-        className="relative w-full min-h-[calc(100dvh-72px)] overflow-hidden border-y-2 border-[var(--nb-border)] bg-white text-[var(--nb-text)]"
+        className="relative w-full min-h-[calc(100dvh-104px)] overflow-hidden border-y-2 border-[var(--nb-border)] bg-white text-[var(--nb-text)]"
       >
-        <div className="mx-auto flex w-full max-w-7xl items-center px-6 py-12 sm:px-10 sm:py-16 min-h-[calc(100dvh-72px)]">
+        <div className="mx-auto flex w-full max-w-7xl items-center px-6 py-12 sm:px-10 sm:py-16 min-h-[calc(100dvh-104px)]">
           <div className="grid items-center gap-10 lg:grid-cols-2">
           <div>
             <p className="text-base font-extrabold tracking-widest text-[var(--nb-muted)]">
@@ -28,18 +28,20 @@ export default function Home() {
             </p>
 
             <div className="mt-12 flex flex-wrap gap-5">
-              <Link
-                href="#about"
-                className="inline-flex items-center gap-2 rounded-2xl border-2 border-[var(--nb-border)] bg-[var(--nb-accent)] px-7 py-4 text-lg font-extrabold text-white shadow-[6px_6px_0_0_var(--nb-shadow)] transition-transform hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[7px_7px_0_0_var(--nb-shadow)]"
+              <a
+                href="mailto:naveezkhoja1063@gmail.com"
+                className="inline-flex items-center gap-2 rounded-2xl border-2 border-[var(--nb-border)] bg-[var(--nb-accent)] px-7 py-4 text-lg font-extrabold text-white shadow-[6px_6px_0_0_var(--nb-shadow)] transition hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[7px_7px_0_0_var(--nb-shadow)]"
               >
-                About me <span aria-hidden="true">↗</span>
-              </Link>
-              <Link
-                href="#projects"
-                className="inline-flex items-center gap-2 rounded-2xl border-2 border-[var(--nb-border)] bg-white px-7 py-4 text-lg font-extrabold text-[var(--nb-text)] shadow-[6px_6px_0_0_var(--nb-shadow)] transition-transform hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[7px_7px_0_0_var(--nb-shadow)]"
+                Get in touch <span aria-hidden="true">↗</span>
+              </a>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-2xl border-2 border-[var(--nb-border)] bg-white px-7 py-4 text-lg font-extrabold text-[var(--nb-text)] shadow-[6px_6px_0_0_var(--nb-shadow)] transition hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[7px_7px_0_0_var(--nb-shadow)]"
               >
-                View projects <span aria-hidden="true">↗</span>
-              </Link>
+                Resume <span aria-hidden="true">↗</span>
+              </a>
             </div>
           </div>
 
@@ -72,20 +74,6 @@ export default function Home() {
 
       <section id="about" className="scroll-mt-28">
         <AboutSection />
-      </section>
-
-      <section
-        id="projects"
-        className="scroll-mt-28 border-t-2 border-[var(--nb-border)]"
-      >
-        <div className="mx-auto w-full max-w-7xl px-6 py-14 sm:px-10">
-          <h2 className="text-3xl font-extrabold tracking-tight text-[var(--nb-text)]">
-            Projects.
-          </h2>
-          <p className="mt-4 text-sm leading-7 text-[var(--nb-muted)]">
-            Coming soon.
-          </p>
-        </div>
       </section>
 
       <section

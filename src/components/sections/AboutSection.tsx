@@ -2,8 +2,10 @@
 
 import { useMemo, useState } from "react";
 import { ChevronRight } from "lucide-react";
+import { Card } from "@/components/ui/Card";
 
 const connectLinks = [
+  { label: "Email", href: "mailto:naveezkhoja1063@gmail.com" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/naviz-khoja/" },
   { label: "GitHub", href: "https://github.com/naveeez10" },
   { label: "Twitter", href: "https://twitter.com/iam_viz" },
@@ -15,17 +17,20 @@ const coreTechnologies = [
   "Dart",
   "Kotlin",
   "Swift",
-  "JavaScript/TypeScript",
+  "TypeScript",
   "C++",
   "Go",
+  "Python",
   "Flutter",
   "Firebase",
   "Next.js",
   "NestJS",
-  "Express.js",
+  "Bun",
   "MongoDB",
   "MySQL",
   "GCP",
+  "Kubernetes",
+  "Docker",
 ] as const;
 
 type Role = {
@@ -42,7 +47,7 @@ const roles: Role[] = [
     title: "Founding Software Engineer",
     dates: "Jun 2024 — Present",
     stack:
-      "Flutter, Firebase, Dart, Android, Kotlin, Swift, TypeScript, GCP, GenAI, Python",
+      "Flutter, Firebase, Kotlin, Swift, TypeScript, Go, Python, Bun, GCP, Kubernetes, Docker, GenAI",
     bullets: [
       {
         id: "adora-se-owned-location",
@@ -108,6 +113,19 @@ const roles: Role[] = [
             <strong>Cloud Functions</strong>, and <strong>Cloud Tasks</strong>,
             ensuring <strong>static IP-based</strong> outbound access to meet
             telecom-grade security/compliance requirements.
+          </>
+        ),
+      },
+      {
+        id: "adora-se-k8s-line",
+        content: (
+          <>
+            Contributed to a <strong>Kubernetes-native LINE message monitoring
+            platform</strong> on <strong>GKE</strong> serving thousands of users
+            across production shards; orchestrated user lifecycle via{" "}
+            <strong>custom Kubernetes operators (kubebuilder / CRDs)</strong>,
+            dynamically migrating authenticated sessions from onboarding pools to
+            application shards using shared <strong>ReadWriteMany PVCs</strong>.
           </>
         ),
       },
@@ -275,14 +293,14 @@ function Section({
   children,
 }: Readonly<{ title: string; children: React.ReactNode }>) {
   return (
-    <section className="rounded-2xl border-2 border-[var(--nb-border)] bg-[var(--nb-surface)] p-6 shadow-[6px_6px_0_0_var(--nb-shadow)] transition-transform transition-colors hover:-translate-x-[1px] hover:-translate-y-[1px] hover:bg-[var(--nb-accent-soft)] hover:shadow-[7px_7px_0_0_var(--nb-shadow)]">
+    <Card as="section" interactive className="p-6">
       <h2 className="text-sm font-extrabold tracking-tight text-[var(--nb-text)]">
         {title}
       </h2>
       <div className="mt-4 text-sm leading-7 text-[var(--nb-muted)]">
         {children}
       </div>
-    </section>
+    </Card>
   );
 }
 
@@ -303,22 +321,57 @@ function ExpandableBullets({
   }, [bullets, canExpand, defaultVisibleCount, expanded]);
 
   return (
-    <div>
-      <div className="relative">
-        <ul
-          className={[
-            "mt-3 list-disc space-y-1 pl-5 text-[15px] leading-7",
-            !expanded && canExpand ? "fade-mask-bottom" : "",
-          ].join(" ")}
-        >
-          {visible.map((b) => (
-            <li key={b.id}>{b.content}</li>
-          ))}
-        </ul>
-      </div>
+    <ul
+      className={[
+        "mt-3 list-disc space-y-1 pl-5 text-[15px] leading-7",
+        !expanded && canExpand ? "fade-mask-bottom" : "",
+      ].join(" ")}
+    >
+      {visible.map((b) => (
+        <li key={b.id}>{b.content}</li>
+      ))}
+    </ul>
+  );
+}
 
-      {/* Toggle moved into the list container (bottom-right) for a subtler affordance */}
-    </div>
+function RoleToggle({
+  canExpand,
+  expanded,
+  onToggle,
+}: Readonly<{
+  canExpand: boolean;
+  expanded: boolean;
+  onToggle: () => void;
+}>) {
+  return (
+    <button
+      type="button"
+      className={[
+        "absolute left-0 top-1.5",
+        "flex h-5 w-5 items-center justify-center rounded-full border-2 border-[var(--nb-border)] bg-[var(--nb-accent)] shadow-[3px_3px_0_0_var(--nb-shadow)]",
+        "transition",
+        canExpand
+          ? "hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[4px_4px_0_0_var(--nb-shadow)]"
+          : "cursor-default",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--nb-border)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--nb-bg)]",
+      ].join(" ")}
+      aria-label={
+        canExpand
+          ? expanded
+            ? "Collapse experience details"
+            : "Expand experience details"
+          : undefined
+      }
+      aria-expanded={canExpand ? expanded : undefined}
+      disabled={!canExpand}
+      onClick={onToggle}
+    >
+      <ChevronRight
+        className="h-3.5 w-3.5 text-white transition-transform"
+        style={{ transform: expanded ? "rotate(90deg)" : "rotate(0deg)" }}
+        aria-hidden="true"
+      />
+    </button>
   );
 }
 
@@ -330,7 +383,7 @@ export function AboutSection() {
   return (
     <div className="mx-auto w-full max-w-7xl px-6 py-16 sm:px-10">
       <div className="grid gap-8 lg:grid-cols-[1fr_1.15fr] lg:items-start">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl lg:sticky lg:top-24 lg:self-start">
           <h2 className="text-4xl font-extrabold tracking-tight text-[var(--nb-text)]">
             About.
           </h2>
@@ -389,72 +442,43 @@ export function AboutSection() {
                 className="absolute left-2 top-0 h-full w-[2px] bg-[var(--nb-border)]"
                 aria-hidden="true"
               />
-              {roles.map((r) => (
-                <li key={`${r.company}-${r.title}`} className="relative pl-8">
-                  {(() => {
-                    const roleKey = `${r.company}-${r.title}`;
-                    const canExpand = r.bullets.length > 2;
-                    const expanded = expandedRoleKeys[roleKey] ?? false;
-                    return (
-                      <button
-                        type="button"
-                        className={[
-                          "absolute left-0 top-1.5",
-                          "flex h-5 w-5 items-center justify-center rounded-full border-2 border-[var(--nb-border)] bg-[var(--nb-accent)] shadow-[3px_3px_0_0_var(--nb-shadow)]",
-                          "transition-transform",
-                          canExpand
-                            ? "hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[4px_4px_0_0_var(--nb-shadow)]"
-                            : "cursor-default",
-                          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--nb-border)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--nb-bg)]",
-                        ].join(" ")}
-                        aria-label={
-                          canExpand
-                            ? expanded
-                              ? "Collapse experience details"
-                              : "Expand experience details"
-                            : undefined
-                        }
-                        aria-expanded={canExpand ? expanded : undefined}
-                        disabled={!canExpand}
-                        onClick={() =>
-                          setExpandedRoleKeys((prev) => ({
-                            ...prev,
-                            [roleKey]: !expanded,
-                          }))
-                        }
-                      >
-                      <ChevronRight
-                        className={[
-                          "h-3.5 w-3.5 text-white transition-transform",
-                        ].join(" ")}
-                        style={{
-                          transform: expanded ? "rotate(90deg)" : "rotate(0deg)",
-                        }}
-                        aria-hidden="true"
-                      />
-                      </button>
-                    );
-                  })()}
-                  <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-                    <h3 className="text-base font-extrabold text-[var(--nb-text)]">
-                      {r.company} — {r.title}
-                    </h3>
-                    <p className="text-sm font-semibold text-[var(--nb-muted)]">
-                      {r.dates}
-                    </p>
-                  </div>
-                  {r.stack ? (
-                    <p className="mt-1 text-sm text-[var(--nb-muted)]">
-                      {r.stack}
-                    </p>
-                  ) : null}
-                  <ExpandableBullets
-                    bullets={r.bullets}
-                    defaultVisibleCount={2}
-                    expanded={expandedRoleKeys[`${r.company}-${r.title}`] ?? false}
-                  />
-                </li>
-              ))}
+              {roles.map((r) => {
+                const roleKey = `${r.company}-${r.title}`;
+                const canExpand = r.bullets.length > 2;
+                const expanded = expandedRoleKeys[roleKey] ?? false;
+                return (
+                  <li key={roleKey} className="relative pl-8">
+                    <RoleToggle
+                      canExpand={canExpand}
+                      expanded={expanded}
+                      onToggle={() =>
+                        setExpandedRoleKeys((prev) => ({
+                          ...prev,
+                          [roleKey]: !expanded,
+                        }))
+                      }
+                    />
+                    <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                      <h3 className="text-base font-extrabold text-[var(--nb-text)]">
+                        {r.company} — {r.title}
+                      </h3>
+                      <p className="text-sm font-semibold text-[var(--nb-muted)]">
+                        {r.dates}
+                      </p>
+                    </div>
+                    {r.stack ? (
+                      <p className="mt-1 text-sm text-[var(--nb-muted)]">
+                        {r.stack}
+                      </p>
+                    ) : null}
+                    <ExpandableBullets
+                      bullets={r.bullets}
+                      defaultVisibleCount={2}
+                      expanded={expanded}
+                    />
+                  </li>
+                );
+              })}
             </ol>
           </Section>
 
