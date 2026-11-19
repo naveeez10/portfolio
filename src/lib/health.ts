@@ -16,10 +16,10 @@ export type HealthStats = {
 
 const API = "https://health.googleapis.com/v4/users/me/dataTypes";
 
-type Civil = { year: number; month: number; day: number };
+export type Civil = { year: number; month: number; day: number };
 
 /* Civil date in the owner's time zone, offset by `days`. Servers run in UTC, so never use local Date getters. */
-function civil(days = 0): Civil {
+export function civil(days = 0): Civil {
   const [y, m, d] = new Intl.DateTimeFormat("en-CA", { timeZone: profile.timeZone, year: "numeric", month: "2-digit", day: "2-digit" })
     .format(new Date())
     .split("-")
@@ -27,11 +27,11 @@ function civil(days = 0): Civil {
   const t = new Date(Date.UTC(y, m - 1, d + days));
   return { year: t.getUTCFullYear(), month: t.getUTCMonth() + 1, day: t.getUTCDate() };
 }
-const iso = (c: Civil) => `${c.year}-${String(c.month).padStart(2, "0")}-${String(c.day).padStart(2, "0")}`;
+export const iso = (c: Civil) => `${c.year}-${String(c.month).padStart(2, "0")}-${String(c.day).padStart(2, "0")}`;
 const sameDay = (a?: Partial<Civil>, b?: Civil) => !!a && !!b && a.year === b.year && a.month === b.month && a.day === b.day;
-const num = (v: unknown) => (v == null || v === "" || Number.isNaN(Number(v)) ? null : Number(v));
+export const num = (v: unknown) => (v == null || v === "" || Number.isNaN(Number(v)) ? null : Number(v));
 
-async function accessToken(): Promise<string | null> {
+export async function accessToken(): Promise<string | null> {
   const { GOOGLE_HEALTH_CLIENT_ID: id, GOOGLE_HEALTH_CLIENT_SECRET: secret, GOOGLE_HEALTH_REFRESH_TOKEN: refresh } = process.env;
   if (!id || !secret || !refresh) return null;
   const res = await fetch("https://oauth2.googleapis.com/token", {
@@ -46,7 +46,7 @@ async function accessToken(): Promise<string | null> {
   return (await res.json()).access_token ?? null;
 }
 
-async function call<T>(token: string, path: string, init?: RequestInit): Promise<T | null> {
+export async function call<T>(token: string, path: string, init?: RequestInit): Promise<T | null> {
   const res = await fetch(`${API}/${path}`, {
     ...init,
     headers: { Authorization: `Bearer ${token}`, Accept: "application/json", "Content-Type": "application/json" },

@@ -75,9 +75,10 @@ function HealthRow({ h }: Readonly<{ h: Health }>) {
     ["resting hr", h.restingHr === null ? null : `${h.restingHr} bpm`, "latest"],
   ];
   return (
-    <li className="col-span-2 rounded-[14px] border border-[var(--line)] bg-[var(--panel)] px-4 py-3 lg:col-span-4">
+    <li className="col-span-2 lg:col-span-4">
+      <Link href="/health" className="block rounded-[14px] border border-[var(--line)] bg-[var(--panel)] px-4 py-3 transition-colors hover:border-[var(--accent)]">
       <div className="flex items-center justify-between gap-4">
-        <p className="label">body · from my watch</p>
+        <p className="label">body · from my watch <span className="text-[var(--accent)]">· last 30 days →</span></p>
         {h.stepsWeek.length === 7 && <Spark data={h.stepsWeek} />}
       </div>
       <dl className="mt-1.5 grid grid-cols-3 gap-3">
@@ -89,6 +90,7 @@ function HealthRow({ h }: Readonly<{ h: Health }>) {
           </div>
         ))}
       </dl>
+      </Link>
     </li>
   );
 }
