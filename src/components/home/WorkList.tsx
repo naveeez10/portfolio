@@ -77,9 +77,10 @@ export function WorkList() {
         <p className="mono hidden text-[11px] text-[var(--faint)] sm:block">⌘K to jump around</p>
       </div>
       <ul className="grid grid-cols-1 gap-y-16 sm:gap-y-20 lg:grid-cols-2 lg:gap-x-7">
-        {projects.map((p) => (
-          <li key={p.slug} className="card group">
+        {projects.map((p, n) => (
+          <li key={p.slug} data-fx="in" style={{ "--d": n % 2 } as React.CSSProperties} className="card group">
             <div
+              data-fx="spot tilt"
               className={`media w-full cursor-pointer bg-[var(--panel-2)] ${p.visual === "photo" ? "aspect-[1.04]" : p.visual === "adora" ? "aspect-[1.04]" : "aspect-[0.78] sm:aspect-[1.04]"}`}
               onClick={() => setOpen(p)}
               role="presentation"

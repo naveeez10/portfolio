@@ -42,7 +42,7 @@ export default function AboutPage() {
       <section className="mt-12">
         <h2 className="text-[var(--strong)]">Outside of work:</h2>
         <ul className="mt-1 space-y-1">
-          <li>· Solving contest problems on Codeforces. 1000+ so far, Specialist rated.</li>
+          <li>· Used to grind contest problems on Codeforces: 1000+ solved, Specialist rated.</li>
           <li>· Went to ICPC Amritapuri regionals in 2022 (AIR 64).</li>
           <li>
             · Hackathons, most recently winning the Odoo Hackathon 2025.{" "}

@@ -29,9 +29,9 @@ function clock(times: string[], night: boolean) {
 
 function Stat({ label, value, sub }: Readonly<{ label: string; value: string | null; sub: string }>) {
   return (
-    <li className="rounded-[14px] border border-[var(--line)] bg-[var(--panel)] px-4 py-3">
+    <li data-fx="spot tilt" className="rounded-[14px] border border-[var(--line)] bg-[var(--panel)] px-4 py-3 hover:border-[var(--accent)]">
       <p className="label">{label}</p>
-      <p className="mt-1.5 text-[20px] leading-[24px] text-[var(--strong)]">{value ?? "–"}</p>
+      <p data-fx="count" className="mt-1.5 text-[20px] leading-[24px] text-[var(--strong)]">{value ?? "–"}</p>
       <p className="mono mt-1 text-[11px] text-[var(--faint)]">{sub}</p>
     </li>
   );
@@ -166,7 +166,7 @@ export function HealthDashboard({ data }: Readonly<{ data: HealthHistory }>) {
 
       {workouts.length > 0 && (
         <Section title="workouts">
-          <ul className="divide-y divide-[var(--line)] rounded-[14px] border border-[var(--line)] bg-[var(--panel)]">
+          <ul data-fx="in" className="divide-y divide-[var(--line)] rounded-[14px] border border-[var(--line)] bg-[var(--panel)]">
             {workouts.map((w) => (
               <li key={w.date + w.start} className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-4 py-3">
                 <div>
@@ -184,7 +184,7 @@ export function HealthDashboard({ data }: Readonly<{ data: HealthHistory }>) {
         </Section>
       )}
 
-      <details className="mt-12 rounded-[14px] border border-[var(--line)] bg-[var(--panel)] px-4 py-3">
+      <details data-fx="in" className="mt-12 rounded-[14px] border border-[var(--line)] bg-[var(--panel)] px-4 py-3">
         <summary className="label cursor-pointer">every day as a table</summary>
         <div className="mt-3 overflow-x-auto">
           <table className="mono w-full min-w-[640px] text-left text-[11px] tabular-nums">

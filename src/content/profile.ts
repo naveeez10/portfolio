@@ -9,6 +9,7 @@ export const profile = {
   timeZone: "Asia/Kolkata",
   resumeHref: "/resume.pdf",
   codeforces: "theviz",
+  github: "naveeez10",
 } as const;
 
 export const socialLinks = [
@@ -19,7 +20,7 @@ export const socialLinks = [
   { label: "LeetCode", href: "https://leetcode.com/nvz10/" },
 ] as const;
 
-export type ProjectVisual = "adora" | "oen" | "codeforces" | "photo";
+export type ProjectVisual = "adora" | "oen" | "photo";
 
 export type Project = {
   slug: string;
@@ -61,22 +62,6 @@ export const projects: readonly Project[] = [
       "Building it in my free time, outside my day job.",
     ],
     links: [{ label: "oen-app.com", href: "https://oen-app.com" }],
-  },
-  {
-    slug: "codeforces",
-    title: "103 rated contests and counting.",
-    blurb: "Where the repeats started. Specialist on Codeforces with 1000+ problems solved; this card pulls my rating live.",
-    where: "Codeforces · theviz",
-    visual: "codeforces",
-    points: [
-      "Specialist on Codeforces, with 1000+ problems solved.",
-      "ICPC Amritapuri 2022: AIR 129 in the preliminary, AIR 64 in the regional round.",
-      "Set DSA problems and wrote editorials as a problem-setter intern at iMocha.",
-    ],
-    links: [
-      { label: "Live stats & heatmap", href: "/fun" },
-      { label: "codeforces.com/profile/theviz", href: "https://codeforces.com/profile/theviz" },
-    ],
   },
   {
     slug: "globetrotter",

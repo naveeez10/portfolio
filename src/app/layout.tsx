@@ -1,3 +1,4 @@
+import { Effects, fxBootScript } from "@/components/site/Effects";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Pixelify_Sans } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
@@ -25,7 +26,7 @@ const pixel = Pixelify_Sans({
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://naviz.me";
 const title = "Naviz Khoja — Software Engineer";
 const description =
-  "Naviz Khoja is a software engineer at Adora working across mobile, backend and AI, and building Oen in his free time. Codeforces Specialist and hackathon winner.";
+  "Naviz Khoja is a software engineer at Adora working across mobile, backend and AI, and building Oen in his free time. Hackathon winner.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -98,12 +99,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    /* The boot script adds a class to <html> before hydration, hence suppressHydrationWarning. */
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: fxBootScript }} />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} ${pixel.variable} font-sans antialiased`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
+        <Effects />
         {children}
         <SiteFooter built={built} commit={commit} />
         <TopNav />

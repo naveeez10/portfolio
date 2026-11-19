@@ -40,7 +40,7 @@ type Frame = { title: string; value: ReactNode; note?: ReactNode; children: Reac
 
 export function ChartCard({ title, value, note, children }: Readonly<Frame>) {
   return (
-    <figure className="rounded-[14px] border border-[var(--line)] bg-[var(--panel)] px-4 pb-3 pt-3">
+    <figure data-fx="spot in" className="rounded-[14px] border border-[var(--line)] bg-[var(--panel)] px-4 pb-3 pt-3">
       <figcaption className="flex items-baseline justify-between gap-3">
         <span className="label">{title}</span>
         <span className="text-[15px] text-[var(--strong)]">{value}</span>
@@ -115,7 +115,7 @@ export function Bars({ dates, values, format, label }: Readonly<Series>) {
     <div>
       <div ref={ref} {...props} aria-label={`${label}, last ${n} days`} className="relative h-[112px] cursor-crosshair outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded">
         {w > 0 && (
-          <svg width={w} height={H} className="block overflow-visible">
+          <svg width={w} height={H} className="block overflow-visible" data-fx="draw">
             <line x1={0} x2={w} y1={0.5} y2={0.5} stroke="var(--line)" />
             <line x1={0} x2={w} y1={H / 2} y2={H / 2} stroke="var(--line)" />
             <line x1={0} x2={w} y1={H - 0.5} y2={H - 0.5} stroke="var(--line-2)" />
@@ -123,7 +123,7 @@ export function Bars({ dates, values, format, label }: Readonly<Series>) {
               if (v === null || v <= 0) return null;
               const h = Math.max(2, (v / max) * (H - 1));
               const fill = k === i ? "#1f4fd1" : "var(--accent)";
-              return <path key={k} d={bar(k * slot + (slot - bw) / 2, H - h, bw, h)} fill={fill} opacity={k === last && k !== i ? 0.45 : 1} />;
+              return <path key={k} className="fx-bar" style={{ "--i": k } as React.CSSProperties} d={bar(k * slot + (slot - bw) / 2, H - h, bw, h)} fill={fill} opacity={k === last && k !== i ? 0.45 : 1} />;
             })}
           </svg>
         )}
@@ -157,15 +157,15 @@ export function Line({ dates, values, format, label }: Readonly<Series>) {
     <div>
       <div ref={ref} {...props} aria-label={`${label}, last ${n} days`} className="relative h-[112px] cursor-crosshair outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded">
         {w > 0 && present.length > 0 && (
-          <svg width={w} height={H} className="block overflow-visible">
+          <svg width={w} height={H} className="block overflow-visible" data-fx="draw">
             <line x1={0} x2={w} y1={0.5} y2={0.5} stroke="var(--line)" />
             <line x1={0} x2={w} y1={H - 0.5} y2={H - 0.5} stroke="var(--line-2)" />
             {/* Lone days between gaps have no segment, so give them a dot. */}
-            {values.map((v, k) => (v !== null && values[k - 1] == null && values[k + 1] == null ? <circle key={k} cx={x(k)} cy={y(v)} r={2.5} fill="var(--accent)" /> : null))}
-            <path d={d} fill="none" stroke="var(--accent)" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
+            {values.map((v, k) => (v !== null && values[k - 1] == null && values[k + 1] == null ? <circle key={k} className="fx-dot" cx={x(k)} cy={y(v)} r={2.5} fill="var(--accent)" /> : null))}
+            <path d={d} className="fx-line" pathLength={1} fill="none" stroke="var(--accent)" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
             {i !== null && <line x1={x(i)} x2={x(i)} y1={0} y2={H} stroke="var(--line-2)" />}
             {[i !== null && values[i] !== null ? i : null, end].map((k, j) =>
-              k === null || k < 0 ? null : <circle key={j} cx={x(k)} cy={y(values[k]!)} r={4} fill="var(--accent)" stroke={SURFACE} strokeWidth={2} />,
+              k === null || k < 0 ? null : <circle key={j} className={j === 1 ? "fx-dot" : undefined} cx={x(k)} cy={y(values[k]!)} r={4} fill="var(--accent)" stroke={SURFACE} strokeWidth={2} />,
             )}
           </svg>
         )}
@@ -204,7 +204,7 @@ export function SleepBars({ dates, nights, format }: Readonly<{ dates: string[];
     <div>
       <div ref={ref} {...props} aria-label={`Sleep by stage, last ${n} nights`} className="relative h-[112px] cursor-crosshair outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded">
         {w > 0 && (
-          <svg width={w} height={H} className="block overflow-visible">
+          <svg width={w} height={H} className="block overflow-visible" data-fx="draw">
             <line x1={0} x2={w} y1={0.5} y2={0.5} stroke="var(--line)" />
             <line x1={0} x2={w} y1={H / 2} y2={H / 2} stroke="var(--line)" />
             <line x1={0} x2={w} y1={H - 0.5} y2={H - 0.5} stroke="var(--line-2)" />
@@ -214,12 +214,12 @@ export function SleepBars({ dates, nights, format }: Readonly<{ dates: string[];
               const hasStages = STAGES.some((st) => s[st.key]);
               if (!hasStages) {
                 const h = (s.asleep / max) * (H - 1);
-                return <path key={k} d={bar(bx, H - h, bw, h)} fill="var(--accent)" opacity={i === null || i === k ? 1 : 0.5} />;
+                return <path key={k} className="fx-bar" style={{ "--i": k } as React.CSSProperties} d={bar(bx, H - h, bw, h)} fill="var(--accent)" opacity={i === null || i === k ? 1 : 0.5} />;
               }
               let top = H;
               const segs = STAGES.filter((st) => (s[st.key] ?? 0) > 0);
               return (
-                <g key={k} opacity={i === null || i === k ? 1 : 0.5}>
+                <g key={k} className="fx-bar" style={{ "--i": k } as React.CSSProperties} opacity={i === null || i === k ? 1 : 0.5}>
                   {segs.map((st, j) => {
                     const h = ((s[st.key] ?? 0) / max) * (H - 1);
                     top -= h;

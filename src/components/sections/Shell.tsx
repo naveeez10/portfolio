@@ -232,7 +232,7 @@ export function Shell() {
     }
   };
 
-  const suggestions = ["help", "whoami", "work", "codeforces", "cat skills.json"];
+  const suggestions = ["help", "whoami", "work", "wins", "cat skills.json"];
 
   return (
     <div className="ink">

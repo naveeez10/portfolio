@@ -159,75 +159,6 @@ export function OenVisual() {
   );
 }
 
-/* ---------- Codeforces: live rating sparkline ---------- */
-
-export function CodeforcesMini() {
-  const [ref, on] = useOnScreen<HTMLDivElement>();
-  const [ratings, setRatings] = useState<number[] | null>(null);
-  const [hover, setHover] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (!on || ratings) return;
-    fetch("https://codeforces.com/api/user.rating?handle=theviz")
-      .then((r) => r.json())
-      .then((j) => setRatings(j.result.map((x: { newRating: number }) => x.newRating)))
-      .catch(() => setRatings([]));
-  }, [on, ratings]);
-
-  const W = 300;
-  const H = 120;
-  const pts = ratings?.length
-    ? (() => {
-        const min = Math.min(...ratings) - 40;
-        const max = Math.max(...ratings) + 40;
-        return ratings.map((v, i) => ({ x: (i / (ratings.length - 1)) * W, y: H - ((v - min) / (max - min)) * H, v }));
-      })()
-    : [];
-  const shown = hover !== null && pts[hover] ? pts[hover].v : ratings?.length ? ratings[ratings.length - 1] : null;
-
-  return (
-    <div ref={ref} className="relative flex h-full flex-col justify-between bg-[#2d68ff] p-5 text-white sm:p-6">
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-20"
-        style={{ backgroundImage: "linear-gradient(#fff3 1px, transparent 1px), linear-gradient(90deg, #fff3 1px, transparent 1px)", backgroundSize: "20px 20px" }}
-      />
-      <div className="relative flex items-start justify-between">
-        <div>
-          <p className="mono text-[10px] text-white/75">theviz · {hover !== null ? `contest ${hover + 1}` : "current rating"}</p>
-          <p className="pixel mt-1 text-[56px] leading-none tabular-nums">{shown ?? "····"}</p>
-        </div>
-        <span className="mono flex items-center gap-1.5 rounded-full bg-white/15 px-2 py-0.5 text-[10px]">
-          <span className="h-1.5 w-1.5 rounded-full bg-white" /> live
-        </span>
-      </div>
-      <svg
-        viewBox={`0 0 ${W} ${H}`}
-        className="relative h-auto w-full overflow-visible"
-        onPointerMove={(e) => {
-          if (!pts.length) return;
-          const r = (e.currentTarget as SVGSVGElement).getBoundingClientRect();
-          const i = Math.round(((e.clientX - r.left) / r.width) * (pts.length - 1));
-          setHover(Math.max(0, Math.min(pts.length - 1, i)));
-        }}
-        onPointerLeave={() => setHover(null)}
-        aria-label="Codeforces rating history"
-        role="img"
-      >
-        {pts.length ? (
-          <>
-            <polyline points={pts.map((p) => `${p.x},${p.y}`).join(" ")} fill="none" stroke="#fff" strokeWidth="2" strokeLinejoin="round" />
-            {hover !== null ? <circle cx={pts[hover].x} cy={pts[hover].y} r="4.5" fill="#fff" /> : null}
-          </>
-        ) : (
-          <line x1="0" x2={W} y1={H / 2} y2={H / 2} stroke="#fff" strokeOpacity="0.4" strokeDasharray="4 6" />
-        )}
-      </svg>
-      <p className="mono relative text-[10px] text-white/75">hover the line · {ratings?.length ?? "…"} contests</p>
-    </div>
-  );
-}
-
 export function PhotoVisual({ project }: Readonly<{ project: Project }>) {
   if (!project.photo) return null;
   return <Image src={project.photo.src} alt={project.photo.alt} fill sizes="(max-width: 640px) 100vw, 520px" className="object-cover object-[50%_30%]" />;
@@ -239,8 +170,6 @@ export function ProjectVisual({ project }: Readonly<{ project: Project }>) {
       return <AdoraVisual />;
     case "oen":
       return <OenVisual />;
-    case "codeforces":
-      return <CodeforcesMini />;
     case "photo":
       return <PhotoVisual project={project} />;
   }

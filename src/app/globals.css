@@ -121,9 +121,10 @@ strong { font-weight: 400; color: var(--strong); }
   overflow: hidden;
   border-radius: 22px;
   box-shadow: var(--shadow);
+  transform: translateY(var(--lift, 0px)) perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
   transition: transform 500ms cubic-bezier(0.45, 0.05, 0.12, 1), box-shadow 500ms;
 }
-.card:hover .media { transform: translateY(-4px); box-shadow: 0 30px 60px -24px rgba(17, 18, 20, 0.45); }
+.card:hover .media { --lift: -4px; box-shadow: 0 30px 60px -24px rgba(17, 18, 20, 0.45); }
 
 /* Polaroid */
 .polaroid {
@@ -167,4 +168,63 @@ strong { font-weight: 400; color: var(--strong); }
 .adora-blob { animation: adora-drift 14s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) {
   .adora-blob { animation: none; }
+}
+
+/* ---------- Visual effects (driven by components/site/Effects.tsx via data-fx) ---------- */
+
+/* Body is its own stacking context so the dot-field canvas (z -1) sits above the page background but below content. */
+body { position: relative; z-index: 0; }
+
+/* Spotlight: a soft accent glow that follows the cursor (--mx/--my set on pointermove). */
+[data-fx~="spot"] { position: relative; isolation: isolate; }
+[data-fx~="spot"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(45, 104, 255, 0.11), transparent 65%);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+[data-fx~="spot"]:hover::after { opacity: 1; }
+
+/* Tilt: a few degrees of 3D toward the cursor (--rx/--ry). .media composes it with its own lift. */
+[data-fx~="tilt"]:not(.media) {
+  transform: perspective(700px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 450ms cubic-bezier(0.2, 0.8, 0.2, 1), border-color 150ms;
+}
+[data-fx~="tilt"].fx-tracking { transition-duration: 120ms; }
+
+/* Scroll reveal. Only hides things once the head script has set html.fx, and a fallback shows them after 2.5s if JS never runs. */
+@keyframes fx-failsafe { to { opacity: 1; transform: none; filter: none; } }
+html.fx [data-fx~="in"] {
+  transition: opacity 800ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 800ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 800ms;
+  transition-delay: calc(var(--d, 0) * 90ms);
+}
+html.fx [data-fx~="in"]:not(.fx-seen) {
+  opacity: 0;
+  transform: translateY(22px) scale(0.985);
+  filter: blur(4px);
+}
+html.fx:not(.fx-ready) [data-fx~="in"]:not(.fx-seen) { animation: fx-failsafe 0s 2.5s forwards; }
+
+/* Charts draw in: bars grow from the baseline, lines trace across, end dots land last. */
+html.fx [data-fx~="draw"] .fx-bar {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition-delay: calc(var(--i, 0) * 16ms);
+}
+html.fx [data-fx~="draw"]:not(.fx-drawn) .fx-bar { transform: scaleY(0); }
+html.fx [data-fx~="draw"] .fx-line { stroke-dasharray: 1; transition: stroke-dashoffset 1200ms cubic-bezier(0.45, 0.05, 0.12, 1); }
+html.fx [data-fx~="draw"]:not(.fx-drawn) .fx-line { stroke-dashoffset: 1; }
+html.fx [data-fx~="draw"] .fx-cell { transition: opacity 500ms ease, transform 500ms cubic-bezier(0.2, 0.8, 0.2, 1); transition-delay: calc(var(--i, 0) * 12ms); transform-box: fill-box; transform-origin: center; }
+html.fx [data-fx~="draw"]:not(.fx-drawn) .fx-cell { opacity: 0; transform: scale(0.4); }
+html.fx [data-fx~="draw"] .fx-dot { transition: opacity 300ms 1000ms; }
+html.fx [data-fx~="draw"]:not(.fx-drawn) .fx-dot { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-fx~="tilt"], .media { transform: none !important; }
 }

@@ -16,15 +16,6 @@ function fmt(d: Date, opts: Intl.DateTimeFormatOptions) {
   return new Intl.DateTimeFormat("en-GB", { ...opts, timeZone: profile.timeZone }).format(d);
 }
 
-/* Codeforces' rating bands, so the label matches the number without a second request. */
-function rank(r: number) {
-  const bands: [number, string][] = [
-    [1200, "newbie"], [1400, "pupil"], [1600, "specialist"], [1900, "expert"], [2100, "candidate master"],
-    [2300, "master"], [2400, "international master"], [2600, "grandmaster"], [3000, "international grandmaster"],
-  ];
-  return bands.find(([max]) => r < max)?.[1] ?? "legendary grandmaster";
-}
-
 function mood(hour: number) {
   if (hour < 6) return "asleep, hopefully";
   if (hour < 10) return "coffee first";
@@ -33,7 +24,7 @@ function mood(hour: number) {
   return "one more bug";
 }
 
-function Tile({ label, value, sub, href, num }: Readonly<{ label: string; value: string; sub: ReactNode; href?: string; num?: boolean }>) {
+function Tile({ label, value, sub, href, num, wide }: Readonly<{ label: string; value: string; sub: ReactNode; href?: string; num?: boolean; wide?: boolean }>) {
   const body = (
     <>
       <p className="label">{label}</p>
@@ -42,13 +33,14 @@ function Tile({ label, value, sub, href, num }: Readonly<{ label: string; value:
     </>
   );
   const cls = "block h-full rounded-[14px] border border-[var(--line)] bg-[var(--panel)] px-4 py-3 transition-colors";
-  if (!href) return <li className={cls}>{body}</li>;
+  if (!href) return <li data-fx="spot tilt" className={cls}>{body}</li>;
   const link = href.startsWith("http") ? (
-    <a href={href} target="_blank" rel="noreferrer" className={`${cls} hover:border-[var(--accent)]`}>{body}</a>
+    <a href={href} target="_blank" rel="noreferrer" data-fx="spot tilt" className={`${cls} hover:border-[var(--accent)]`}>{body}</a>
   ) : (
-    <Link href={href} className={`${cls} hover:border-[var(--accent)]`}>{body}</Link>
+    <Link href={href} data-fx="spot tilt" className={`${cls} hover:border-[var(--accent)]`}>{body}</Link>
   );
-  return <li className="group">{link}</li>;
+  /* Three tiles in a two-column phone grid: the last one spans the row instead of sitting alone. */
+  return <li className={`group ${wide ? "col-span-2 sm:col-span-1" : ""}`}>{link}</li>;
 }
 
 type Health = { stepsToday: number | null; stepsWeek: number[]; sleepMinutes: number | null; restingHr: number | null };
@@ -75,8 +67,8 @@ function HealthRow({ h }: Readonly<{ h: Health }>) {
     ["resting hr", h.restingHr === null ? null : `${h.restingHr} bpm`, "latest"],
   ];
   return (
-    <li className="col-span-2 lg:col-span-4">
-      <Link href="/health" className="block rounded-[14px] border border-[var(--line)] bg-[var(--panel)] px-4 py-3 transition-colors hover:border-[var(--accent)]">
+    <li className="col-span-2 sm:col-span-3">
+      <Link href="/health" data-fx="spot" className="block rounded-[14px] border border-[var(--line)] bg-[var(--panel)] px-4 py-3 transition-colors hover:border-[var(--accent)]">
       <div className="flex items-center justify-between gap-4">
         <p className="label">body · from my watch <span className="text-[var(--accent)]">· last 30 days →</span></p>
         {h.stepsWeek.length === 7 && <Spark data={h.stepsWeek} />}
@@ -85,7 +77,7 @@ function HealthRow({ h }: Readonly<{ h: Health }>) {
         {stats.filter(([, v]) => v !== null).map(([label, value, sub]) => (
           <div key={label}>
             <dt className="mono text-[11px] text-[var(--faint)]">{label}</dt>
-            <dd className="mono mt-0.5 text-[17px] leading-[22px] text-[var(--strong)] tabular-nums">{value}</dd>
+            <dd data-fx="count" className="mono mt-0.5 text-[17px] leading-[22px] text-[var(--strong)] tabular-nums">{value}</dd>
             <dd className="mono mt-0.5 text-[11px] text-[var(--faint)]">{sub}</dd>
           </div>
         ))}
@@ -97,15 +89,9 @@ function HealthRow({ h }: Readonly<{ h: Health }>) {
 
 export function NowStrip() {
   const sec = useSyncExternalStore(tick, second, none);
-  const [cf, setCf] = useState<number | null>(null);
   const [health, setHealth] = useState<Health | null>(null);
 
-  /* Same endpoint as the Codeforces card, so both show the same number. */
   useEffect(() => {
-    fetch(`https://codeforces.com/api/user.rating?handle=${profile.codeforces}`)
-      .then((r) => r.json())
-      .then((j) => setCf(j.result.at(-1)?.newRating ?? null))
-      .catch(() => {});
     fetch("/api/health")
       .then((r) => (r.ok ? r.json() : null))
       .then(setHealth)
@@ -118,22 +104,10 @@ export function NowStrip() {
 
   return (
     <section aria-label="Right now" className="mx-auto w-full max-w-[880px] px-5 pt-12 sm:pt-14">
-      <ul className="rise d3 grid grid-cols-2 gap-2.5 lg:grid-cols-4">
+      <ul className="rise d3 grid grid-cols-2 gap-2.5 sm:grid-cols-3">
         <Tile label="local time · ist" value={time} sub={hour === null ? "…" : mood(hour)} num />
         <Tile label="currently" value="Tech lead at Adora" sub="since oct 2026" href="/about" />
-        <Tile label="side project" value="Building Oen" sub="for two people" href="https://oen-app.com" />
-        <Tile
-          label="codeforces"
-          value={cf ? String(cf) : "····"}
-          sub={
-            <>
-              <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--live)]" />
-              {cf ? rank(cf) : "fetching"}
-            </>
-          }
-          href={`https://codeforces.com/profile/${profile.codeforces}`}
-          num
-        />
+        <Tile label="side project" value="Building Oen" sub="for two people" href="https://oen-app.com" wide />
         {health && <HealthRow h={health} />}
       </ul>
     </section>
