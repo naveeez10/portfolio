@@ -10,6 +10,7 @@
   --faint: #a6a6a6;
   --line: #dcdcdc;
   --line-2: #cfcfcf;
+  --dot: #d9d9d9;
   --accent: #2d68ff;
   --accent-soft: rgba(45, 104, 255, 0.1);
   --live: #16a34a;
@@ -48,7 +49,10 @@ html {
 }
 
 body {
-  background: var(--bg);
+  /* Faint dot grid so the margins read as paper, not as nothing. */
+  background-color: var(--bg);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.5px);
+  background-size: 24px 24px;
   color: var(--text);
   font-size: 14px;
   line-height: 1.55;

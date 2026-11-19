@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Pixelify_Sans } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
+import { SiteFooter } from "@/components/site/SiteFooter";
 import { TopNav } from "@/components/site/TopNav";
 import { CommandMenu } from "@/components/shell/CommandMenu";
 import { Toaster } from "@/components/shell/Toaster";
@@ -84,6 +85,12 @@ const personJsonLd = {
 
 const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
+/* Evaluated once at build time, so the footer says when this version went out. */
+const commit = process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7);
+const built = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata" })
+  .format(new Date())
+  .toLowerCase();
+
 
 export default function RootLayout({
   children,
@@ -98,6 +105,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
         {children}
+        <SiteFooter built={built} commit={commit} />
         <TopNav />
         <CommandMenu />
         <Toaster />

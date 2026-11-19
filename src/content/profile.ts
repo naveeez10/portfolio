@@ -5,6 +5,8 @@ export const profile = {
   title: "Software Engineer",
   company: "Adora Inc.",
   email: "naveezkhoja1063@gmail.com",
+  location: "Ahmedabad, India",
+  timeZone: "Asia/Kolkata",
   resumeHref: "/resume.pdf",
   codeforces: "theviz",
 } as const;

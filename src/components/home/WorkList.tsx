@@ -71,9 +71,12 @@ export function WorkList() {
   const [open, setOpen] = useState<Project | null>(null);
 
   return (
-    <section aria-labelledby="work-heading" className="mx-auto w-full max-w-[520px] px-5 pb-24 pt-10">
-      <h2 id="work-heading" className="sr-only">Work</h2>
-      <ul className="space-y-16 sm:space-y-20">
+    <section aria-labelledby="work-heading" className="mx-auto w-full max-w-[880px] px-5 pb-24 pt-16 sm:pt-20">
+      <div className="mb-6 flex items-baseline justify-between">
+        <h2 id="work-heading" className="label">selected work</h2>
+        <p className="mono hidden text-[11px] text-[var(--faint)] sm:block">⌘K to jump around</p>
+      </div>
+      <ul className="grid grid-cols-1 gap-y-16 sm:gap-y-20 lg:grid-cols-2 lg:gap-x-7">
         {projects.map((p) => (
           <li key={p.slug} className="card group">
             <div
