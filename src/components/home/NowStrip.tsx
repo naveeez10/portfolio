@@ -28,8 +28,8 @@ function Tile({ label, value, sub, href, num, wide }: Readonly<{ label: string; 
   const body = (
     <>
       <p className="label">{label}</p>
-      <p className={`mt-1.5 h-[22px] leading-[22px] text-[var(--strong)] tabular-nums ${num ? "mono text-[17px]" : "text-[15px]"}`}>{value}</p>
-      <p className="mono mt-1 flex items-center gap-1.5 text-[11px] text-[var(--faint)]">{sub}</p>
+      <p className={`mt-1.5 min-h-[24px] leading-[24px] text-[var(--strong)] tabular-nums ${num ? "mono text-[19px]" : "text-[16.5px]"}`}>{value}</p>
+      <p className="mono mt-1 flex items-center gap-1.5 text-[12px] text-[var(--faint)]">{sub}</p>
     </>
   );
   const cls = "block h-full rounded-[14px] border border-[var(--line)] bg-[var(--panel)] px-4 py-3 transition-colors";
@@ -76,9 +76,9 @@ function HealthRow({ h }: Readonly<{ h: Health }>) {
       <dl className="mt-1.5 grid grid-cols-3 gap-3">
         {stats.filter(([, v]) => v !== null).map(([label, value, sub]) => (
           <div key={label}>
-            <dt className="mono text-[11px] text-[var(--faint)]">{label}</dt>
-            <dd data-fx="count" className="mono mt-0.5 text-[17px] leading-[22px] text-[var(--strong)] tabular-nums">{value}</dd>
-            <dd className="mono mt-0.5 text-[11px] text-[var(--faint)]">{sub}</dd>
+            <dt className="mono text-[12px] text-[var(--faint)]">{label}</dt>
+            <dd data-fx="count" className="mono mt-0.5 text-[19px] leading-[24px] text-[var(--strong)] tabular-nums">{value}</dd>
+            <dd className="mono mt-0.5 text-[12px] text-[var(--faint)]">{sub}</dd>
           </div>
         ))}
       </dl>
@@ -103,7 +103,7 @@ export function NowStrip() {
   const hour = d ? Number(fmt(d, { hour: "numeric", hourCycle: "h23" })) : null;
 
   return (
-    <section aria-label="Right now" className="mx-auto w-full max-w-[880px] px-5 pt-12 sm:pt-14">
+    <section aria-label="Right now" className="mx-auto w-full max-w-[960px] px-5 pt-12 sm:pt-14">
       <ul className="rise d3 grid grid-cols-2 gap-2.5 sm:grid-cols-3">
         <Tile label="local time · ist" value={time} sub={hour === null ? "…" : mood(hour)} num />
         <Tile label="currently" value="Tech lead at Adora" sub="since oct 2026" href="/about" />

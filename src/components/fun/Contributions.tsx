@@ -52,8 +52,8 @@ export function Contributions({ data, user }: Readonly<{ data: Data; user: strin
         {stats.map((s) => (
           <li key={s.label} data-fx="spot tilt" className="rounded-[14px] border border-[var(--line)] bg-[var(--bg)] px-3.5 py-2.5 hover:border-[var(--accent)]">
             <p className="label">{s.label}</p>
-            <p data-fx="count" className="mt-1 text-[18px] leading-[22px] text-[var(--strong)]">{s.value}</p>
-            <p className="mono mt-0.5 text-[11px] text-[var(--faint)]">{s.sub}</p>
+            <p data-fx="count" className="mt-1 text-[20px] leading-[24px] text-[var(--strong)]">{s.value}</p>
+            <p className="mono mt-0.5 text-[12px] text-[var(--faint)]">{s.sub}</p>
           </li>
         ))}
       </ul>
@@ -95,7 +95,7 @@ export function Contributions({ data, user }: Readonly<{ data: Data; user: strin
             ))}
           </svg>
         </div>
-        <div className="mono mt-2 flex flex-wrap items-center justify-between gap-2 text-[11px] text-[var(--faint)]">
+        <div className="mono mt-2 flex flex-wrap items-center justify-between gap-2 text-[12px] text-[var(--faint)]">
           <span aria-live="polite" className="text-[var(--text)]">
             {h ? (
               <>

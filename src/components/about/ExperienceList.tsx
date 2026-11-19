@@ -22,7 +22,7 @@ export function ExperienceList() {
                 <span className="ml-2">{r.company}</span>
                 {r.current ? <span className="ml-2 inline-block h-1.5 w-1.5 -translate-y-px rounded-full bg-[var(--accent)]" aria-label="current" /> : null}
               </span>
-              <span className="mono text-[11px] text-[var(--faint)]">{r.dates}</span>
+              <span className="mono text-[12px] text-[var(--faint)]">{r.dates}</span>
             </button>
             <div className="reveal" data-open={isOpen}>
               <div>
@@ -38,7 +38,7 @@ export function ExperienceList() {
                   {r.stack ? (
                     <ul className="mt-3 flex flex-wrap gap-1.5">
                       {r.stack.map((t) => (
-                        <li key={t} className="mono rounded bg-[var(--panel-2)] px-1.5 py-0.5 text-[11px] text-[var(--text)]">
+                        <li key={t} className="mono rounded bg-[var(--panel-2)] px-1.5 py-0.5 text-[12px] text-[var(--text)]">
                           {t}
                         </li>
                       ))}

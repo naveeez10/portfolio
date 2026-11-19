@@ -15,13 +15,13 @@ export const revalidate = 21600;
 function Heading({ icon, title, sub }: Readonly<{ icon: readonly string[]; title: string; sub: string }>) {
   return (
     <div>
-      <h2 className="flex items-center gap-2.5 text-[16px] text-[var(--strong)]">
+      <h2 className="flex items-center gap-2.5 text-[18px] text-[var(--strong)]">
         <span className="text-[var(--strong)]">
           <PixelIcon bitmap={icon} scale={1.5} />
         </span>
         {title}
       </h2>
-      <p className="mt-1 max-w-[340px] text-[13px] leading-[1.4]">{sub}</p>
+      <p className="mt-1 max-w-[370px] text-[14.5px] leading-[1.4]">{sub}</p>
     </div>
   );
 }
@@ -29,12 +29,12 @@ function Heading({ icon, title, sub }: Readonly<{ icon: readonly string[]; title
 export default async function FunPage() {
   const github = await getContributions(profile.github);
   return (
-    <main className="mx-auto w-full max-w-[720px] px-5 pb-24 pt-24 sm:pt-28">
+    <main className="mx-auto w-full max-w-[780px] px-5 pb-24 pt-24 sm:pt-28">
       <div className="rise flex items-center gap-2.5 text-[var(--strong)]">
         <PixelIcon bitmap={CURSOR} scale={1.5} />
-        <h1 className="text-[16px]">fun</h1>
+        <h1 className="text-[18px]">fun</h1>
       </div>
-      <p className="rise d1 mt-8 max-w-[260px] text-[15px] leading-[1.45]">
+      <p className="rise d1 mt-8 max-w-[290px] text-[16.5px] leading-[1.45]">
         A collection of <strong>experiments</strong>, <strong>hackathons</strong>, and <strong>things built for fun</strong>.
       </p>
 
@@ -44,7 +44,7 @@ export default async function FunPage() {
           {github ? (
             <Contributions data={github} user={profile.github} />
           ) : (
-            <p className="mono text-[12px] text-[var(--faint)]">
+            <p className="mono text-[13px] text-[var(--faint)]">
               Couldn&apos;t reach GitHub right now.{" "}
               <a className="link" href={`https://github.com/${profile.github}`} target="_blank" rel="noreferrer">See it on GitHub ↗</a>
             </p>
@@ -74,9 +74,9 @@ export default async function FunPage() {
               <span>
                 <span className="text-[var(--strong)]">{a.title}</span>
                 <span className="ml-2 text-[var(--accent)]">{a.result}</span>
-                <span className="mt-0.5 block text-[13px]">{a.detail}</span>
+                <span className="mt-0.5 block text-[14.5px]">{a.detail}</span>
               </span>
-              <span className="mono text-[11px] text-[var(--faint)]">{a.year}</span>
+              <span className="mono text-[12px] text-[var(--faint)]">{a.year}</span>
             </li>
           ))}
         </ul>

@@ -12,15 +12,15 @@ export const maxDuration = 60;
 export default async function HealthPage() {
   const data = await getHealthHistory();
   return (
-    <main className="mx-auto w-full max-w-[880px] px-5 pb-24 pt-24 sm:pt-28">
-      <h1 className="rise text-[28px] leading-tight text-[var(--strong)]">Health</h1>
-      <p className="rise d1 mt-2 text-[15px] leading-[1.5]">
+    <main className="mx-auto w-full max-w-[960px] px-5 pb-24 pt-24 sm:pt-28">
+      <h1 className="rise text-[32px] leading-tight text-[var(--strong)]">Health</h1>
+      <p className="rise d1 mt-2 text-[16.5px] leading-[1.5]">
         The last {HISTORY_DAYS} days from my Fitbit Air, synced through Google Health. Hover or tap a chart for each day.
       </p>
       {data ? (
         <HealthDashboard data={data} />
       ) : (
-        <p className="mono mt-10 text-[12px] text-[var(--faint)]">
+        <p className="mono mt-10 text-[13px] text-[var(--faint)]">
           No data right now. <Link className="link" href="/">Back home</Link>
         </p>
       )}

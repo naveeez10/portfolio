@@ -29,7 +29,7 @@ export function TopNav() {
         <Link href="/" aria-label="Home" className="text-[var(--accent)] transition-transform hover:-rotate-6 hover:scale-110">
           <PixelIcon bitmap={FOLDER} scale={2} fill="#ffffff" />
         </Link>
-        <ul className="flex items-center gap-5 text-[15px]">
+        <ul className="flex items-center gap-5 text-[16.5px]">
           {tabs.map((t) => {
             const active = t.href === "/" ? path === "/" : path.startsWith(t.href);
             return (
@@ -56,8 +56,8 @@ export function TopNav() {
               aria-label="Copy email address"
               className="group flex items-center gap-1 text-[var(--strong)] transition-colors hover:text-[var(--accent)]"
             >
-              <span className="pixel flex h-[24px] w-[26px] items-center justify-center border-2 border-current text-[15px] leading-none">@</span>
-              <span className="text-[13px] leading-none transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
+              <span className="pixel flex h-[24px] w-[26px] items-center justify-center border-2 border-current text-[16.5px] leading-none">@</span>
+              <span className="text-[14.5px] leading-none transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
             </button>
           </li>
           {shortcuts.map((l) => (
@@ -69,8 +69,8 @@ export function TopNav() {
                 aria-label={l.label}
                 className="group flex items-center gap-1 text-[var(--strong)] transition-colors hover:text-[var(--accent)]"
               >
-                <span className="pixel flex h-[24px] w-[26px] items-center justify-center border-2 border-current text-[15px] leading-none">{marks[l.label]}</span>
-                <span className="text-[13px] leading-none transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
+                <span className="pixel flex h-[24px] w-[26px] items-center justify-center border-2 border-current text-[16.5px] leading-none">{marks[l.label]}</span>
+                <span className="text-[14.5px] leading-none transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
               </a>
             </li>
           ))}
@@ -83,7 +83,7 @@ export function TopNav() {
           className="group relative text-[var(--strong)] transition-colors hover:text-[var(--accent)]"
         >
           <PixelIcon bitmap={FOLDER_OPEN} scale={2} />
-          <span className="mono pointer-events-none absolute right-0 top-full mt-1.5 whitespace-nowrap rounded bg-[var(--strong)] px-1.5 py-0.5 text-[10px] text-white opacity-0 transition-opacity group-hover:opacity-100">
+          <span className="mono pointer-events-none absolute right-0 top-full mt-1.5 whitespace-nowrap rounded bg-[var(--strong)] px-1.5 py-0.5 text-[11px] text-white opacity-0 transition-opacity group-hover:opacity-100">
             resume.pdf
           </span>
         </a>

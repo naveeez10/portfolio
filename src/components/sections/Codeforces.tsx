@@ -139,7 +139,7 @@ function RatingChart({ ratings }: Readonly<{ ratings: RatingChange[] }>) {
 
       {h ? (
         <div
-          className="mono pointer-events-none absolute top-2 z-10 w-[220px] rounded-md border border-[var(--line-2)] bg-[var(--panel)] px-2.5 py-2 text-[11px] shadow-[var(--shadow)]"
+          className="mono pointer-events-none absolute top-2 z-10 w-[220px] rounded-md border border-[var(--line-2)] bg-[var(--panel)] px-2.5 py-2 text-[12px] shadow-[var(--shadow)]"
           style={{ left: `clamp(0px, calc(${(h.x / W) * 100}% - 110px), calc(100% - 220px))` }}
         >
           <p className="truncate text-[var(--strong)]">{h.r.contestName}</p>
@@ -220,7 +220,7 @@ function Heatmap({ subs }: Readonly<{ subs: Submission[] }>) {
               aria-selected={y === year}
               onClick={() => setYear(y)}
               className={[
-                "mono rounded px-1.5 py-0.5 text-[11px] transition-colors",
+                "mono rounded px-1.5 py-0.5 text-[12px] transition-colors",
                 y === year ? "bg-[var(--accent)] text-white" : "text-[var(--faint)] hover:text-[var(--strong)]",
               ].join(" ")}
             >
@@ -282,7 +282,7 @@ export function Codeforces() {
           <dl className="mt-4 grid grid-cols-3 border-y border-[var(--line)] sm:grid-cols-5">
             {(stats ?? Array.from({ length: 5 }, (_, i) => ({ k: ["rating", "peak", "contests", "solved", "best jump"][i], v: "" }))).map((s, i) => (
               <div key={s.k} className={["py-3", i ? "sm:border-l sm:border-[var(--line)] sm:pl-4" : "", i % 3 ? "border-l border-[var(--line)] pl-4 sm:pl-4" : "", i >= 3 ? "border-t border-[var(--line)] sm:border-t-0" : ""].join(" ")}>
-                <dt className="mono text-[10px] uppercase tracking-[0.12em] text-[var(--faint)]">{s.k}</dt>
+                <dt className="mono text-[11px] uppercase tracking-[0.12em] text-[var(--faint)]">{s.k}</dt>
                 <dd className="mt-0.5 text-lg font-medium tabular-nums text-[var(--strong)]">
                   {s.v || <span className="inline-block h-4 w-10 animate-pulse rounded bg-[var(--panel-2)] align-middle" />}
                 </dd>

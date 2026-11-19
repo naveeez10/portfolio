@@ -244,10 +244,10 @@ export function Shell() {
           <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" aria-hidden="true" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" aria-hidden="true" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" aria-hidden="true" />
-          <span className="mono ml-2 text-[11px] text-[var(--faint)]">naviz@portfolio: ~</span>
+          <span className="mono ml-2 text-[12px] text-[var(--faint)]">naviz@portfolio: ~</span>
         </div>
 
-        <div ref={scrollRef} className="mono h-[300px] overflow-y-auto px-4 py-3 text-[12.5px] leading-[1.7]" role="log" aria-live="polite">
+        <div ref={scrollRef} className="mono h-[300px] overflow-y-auto px-4 py-3 text-[14px] leading-[1.7]" role="log" aria-live="polite">
           {lines.map((l) => (
             <div key={l.id} className={l.kind === "err" ? "text-[#f87171]" : l.kind === "in" ? "text-[var(--strong)]" : "text-[var(--text)]"}>
               {l.kind === "in" ? (
@@ -318,7 +318,7 @@ export function Shell() {
                 setHistory((h) => [...h, s]);
                 void run(s);
               }}
-              className="mono rounded border border-[var(--line-2)] px-1.5 py-0.5 text-[11px] text-[var(--text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+              className="mono rounded border border-[var(--line-2)] px-1.5 py-0.5 text-[12px] text-[var(--text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
             >
               {s}
             </button>

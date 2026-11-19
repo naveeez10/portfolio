@@ -31,8 +31,8 @@ function Stat({ label, value, sub }: Readonly<{ label: string; value: string | n
   return (
     <li data-fx="spot tilt" className="rounded-[14px] border border-[var(--line)] bg-[var(--panel)] px-4 py-3 hover:border-[var(--accent)]">
       <p className="label">{label}</p>
-      <p data-fx="count" className="mt-1.5 text-[20px] leading-[24px] text-[var(--strong)]">{value ?? "–"}</p>
-      <p className="mono mt-1 text-[11px] text-[var(--faint)]">{sub}</p>
+      <p data-fx="count" className="mt-1.5 text-[22px] leading-[26px] text-[var(--strong)]">{value ?? "–"}</p>
+      <p className="mono mt-1 text-[12px] text-[var(--faint)]">{sub}</p>
     </li>
   );
 }
@@ -122,7 +122,7 @@ export function HealthDashboard({ data }: Readonly<{ data: HealthHistory }>) {
           >
             <SleepBars dates={dates} nights={nights} format={hm} />
             {/* Legend doubles as the visible labels the lighter stage colours need. */}
-            <ul className="mono mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-[var(--text)]">
+            <ul className="mono mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[12px] text-[var(--text)]">
               {STAGES.map((st) => {
                 const m = avg(slept.map((n) => n[st.key]));
                 return (
@@ -170,12 +170,12 @@ export function HealthDashboard({ data }: Readonly<{ data: HealthHistory }>) {
             {workouts.map((w) => (
               <li key={w.date + w.start} className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-4 py-3">
                 <div>
-                  <p className="text-[15px] capitalize text-[var(--strong)]">{w.type}</p>
-                  <p className="mono text-[11px] text-[var(--faint)]">
+                  <p className="text-[16.5px] capitalize text-[var(--strong)]">{w.type}</p>
+                  <p className="mono text-[12px] text-[var(--faint)]">
                     {longDate(w.date)} · {w.start}
                   </p>
                 </div>
-                <p className="mono text-[12px] tabular-nums text-[var(--text)]">
+                <p className="mono text-[13px] tabular-nums text-[var(--text)]">
                   {[w.minutes !== null && `${w.minutes} min`, w.km && `${one(w.km)} km`, w.kcal !== null && `${w.kcal} kcal`, w.avgHr && `${w.avgHr} bpm`].filter(Boolean).join(" · ")}
                 </p>
               </li>
@@ -187,7 +187,7 @@ export function HealthDashboard({ data }: Readonly<{ data: HealthHistory }>) {
       <details data-fx="in" className="mt-12 rounded-[14px] border border-[var(--line)] bg-[var(--panel)] px-4 py-3">
         <summary className="label cursor-pointer">every day as a table</summary>
         <div className="mt-3 overflow-x-auto">
-          <table className="mono w-full min-w-[640px] text-left text-[11px] tabular-nums">
+          <table className="mono w-full min-w-[640px] text-left text-[12px] tabular-nums">
             <thead className="text-[var(--faint)]">
               <tr>
                 {["date", "steps", "km", "kcal", "zone min", "floors", "sleep", "rhr", "hrv", "spo2", "breaths"].map((h) => (
@@ -216,7 +216,7 @@ export function HealthDashboard({ data }: Readonly<{ data: HealthHistory }>) {
         </div>
       </details>
 
-      <p className="mono mt-6 text-[11px] text-[var(--faint)]">
+      <p className="mono mt-6 text-[12px] text-[var(--faint)]">
         updated {updated} ist · refreshes hourly{data.failed.length ? ` · couldn't load: ${data.failed.join(", ")}` : ""}
       </p>
     </>

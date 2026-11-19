@@ -43,9 +43,9 @@ export function ChartCard({ title, value, note, children }: Readonly<Frame>) {
     <figure data-fx="spot in" className="rounded-[14px] border border-[var(--line)] bg-[var(--panel)] px-4 pb-3 pt-3">
       <figcaption className="flex items-baseline justify-between gap-3">
         <span className="label">{title}</span>
-        <span className="text-[15px] text-[var(--strong)]">{value}</span>
+        <span className="text-[16.5px] text-[var(--strong)]">{value}</span>
       </figcaption>
-      {note && <p className="mono mt-0.5 text-right text-[11px] text-[var(--faint)]">{note}</p>}
+      {note && <p className="mono mt-0.5 text-right text-[12px] text-[var(--faint)]">{note}</p>}
       <div className="mt-2">{children}</div>
     </figure>
   );
@@ -64,7 +64,7 @@ function Tip({ x, w, children }: Readonly<{ x: number; w: number; children: Reac
     <div
       ref={ref}
       role="status"
-      className="mono pointer-events-none absolute -top-1 z-10 w-max max-w-[calc(100vw-48px)] -translate-x-1/2 -translate-y-full rounded-[8px] border border-[var(--line)] bg-white px-2 py-1 text-[11px] leading-[1.45] text-[var(--strong)] shadow-sm"
+      className="mono pointer-events-none absolute -top-1 z-10 w-max max-w-[calc(100vw-48px)] -translate-x-1/2 -translate-y-full rounded-[8px] border border-[var(--line)] bg-white px-2 py-1 text-[12px] leading-[1.45] text-[var(--strong)] shadow-sm"
       style={{ left: x }}
     >
       {children}
@@ -74,7 +74,7 @@ function Tip({ x, w, children }: Readonly<{ x: number; w: number; children: Reac
 
 function Axis({ dates }: Readonly<{ dates: string[] }>) {
   return (
-    <div className="mono mt-1.5 flex justify-between text-[10px] text-[var(--faint)]">
+    <div className="mono mt-1.5 flex justify-between text-[11px] text-[var(--faint)]">
       <span>{short(dates[0])}</span>
       <span>{short(dates[Math.floor(dates.length / 2)])}</span>
       <span>today</span>
@@ -127,7 +127,7 @@ export function Bars({ dates, values, format, label }: Readonly<Series>) {
             })}
           </svg>
         )}
-        <span className="mono pointer-events-none absolute right-0 top-0.5 bg-[var(--panel)] pl-1 text-[10px] text-[var(--faint)]">{compact(max)}</span>
+        <span className="mono pointer-events-none absolute right-0 top-0.5 bg-[var(--panel)] pl-1 text-[11px] text-[var(--faint)]">{compact(max)}</span>
         {i !== null && (
           <Tip x={i * slot + slot / 2} w={w}>
             {longDate(dates[i])} · {values[i] === null ? "no data" : `${format(values[i]!)}${i === last ? " so far" : ""}`}
@@ -169,8 +169,8 @@ export function Line({ dates, values, format, label }: Readonly<Series>) {
             )}
           </svg>
         )}
-        <span className="mono pointer-events-none absolute right-0 top-0.5 bg-[var(--panel)] pl-1 text-[10px] text-[var(--faint)]">high {format(hi)}</span>
-        <span className="mono pointer-events-none absolute bottom-0.5 right-0 bg-[var(--panel)] pl-1 text-[10px] text-[var(--faint)]">low {format(lo)}</span>
+        <span className="mono pointer-events-none absolute right-0 top-0.5 bg-[var(--panel)] pl-1 text-[11px] text-[var(--faint)]">high {format(hi)}</span>
+        <span className="mono pointer-events-none absolute bottom-0.5 right-0 bg-[var(--panel)] pl-1 text-[11px] text-[var(--faint)]">low {format(lo)}</span>
         {i !== null && (
           <Tip x={x(i)} w={w}>
             {longDate(dates[i])} · {values[i] === null ? "no data" : format(values[i]!)}
@@ -237,7 +237,7 @@ export function SleepBars({ dates, nights, format }: Readonly<{ dates: string[];
             })}
           </svg>
         )}
-        <span className="mono pointer-events-none absolute right-0 top-0.5 bg-[var(--panel)] pl-1 text-[10px] text-[var(--faint)]">{format(max)}</span>
+        <span className="mono pointer-events-none absolute right-0 top-0.5 bg-[var(--panel)] pl-1 text-[11px] text-[var(--faint)]">{format(max)}</span>
         {i !== null && (
           <Tip x={i * slot + slot / 2} w={w}>
             {nights[i] ? (

@@ -4,7 +4,7 @@ import { profile } from "@/content/profile";
 
 export function Hero() {
   return (
-    <section className="mx-auto w-full max-w-[880px] px-5 pt-28 sm:pt-36">
+    <section className="mx-auto w-full max-w-[960px] px-5 pt-28 sm:pt-36">
       {/* SVG filter that turns the black ink drawing into accent blue on a transparent ground. */}
       <svg width="0" height="0" className="absolute" aria-hidden="true">
         <filter id="ink-to-blue" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
@@ -15,11 +15,11 @@ export function Hero() {
       {/* Name and intro on the left, Sisyphus on the right once there's room for both. */}
       <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-14">
         <div>
-          <h1 className="pixel rise text-[clamp(52px,12vw,76px)] leading-[0.9] tracking-[-0.01em] text-[var(--strong)]">
+          <h1 className="pixel rise text-[clamp(56px,13vw,88px)] leading-[0.9] tracking-[-0.01em] text-[var(--strong)]">
             {profile.first} <LongJ word={profile.last} />
           </h1>
 
-          <p className="rise d1 mt-6 max-w-[460px] text-[15px] leading-[1.5]">
+          <p className="rise d1 mt-6 max-w-[500px] text-[16.5px] leading-[1.5]">
             Hi, I&apos;m a <strong>software engineer</strong> and <strong>tech lead</strong> at{" "}
             <a href="https://www.adora-app.com" target="_blank" rel="noreferrer" className="link">Adora</a>, working across{" "}
             <strong>mobile</strong>, <strong>backend</strong> and <strong>AI</strong>. In my free time I&apos;m building{" "}
@@ -27,7 +27,7 @@ export function Hero() {
           </p>
         </div>
 
-        <figure className="rise d2 w-full max-w-[440px] lg:max-w-none">
+        <figure className="rise d2 w-full max-w-[480px] lg:max-w-none">
           <Image
             src="/sisyphus.gif"
             alt="Line drawing of Sisyphus pushing a boulder up a hill"
@@ -38,7 +38,7 @@ export function Hero() {
             className="h-auto w-full"
             style={{ filter: "url(#ink-to-blue)" }}
           />
-          <figcaption className="mono mt-2 text-[11px] text-[var(--faint)]">built on repeats.</figcaption>
+          <figcaption className="mono mt-2 text-[12px] text-[var(--faint)]">built on repeats.</figcaption>
         </figure>
       </div>
     </section>

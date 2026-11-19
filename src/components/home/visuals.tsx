@@ -41,14 +41,14 @@ type Heart = { id: number; x: number; drift: number };
 function StepRow({ who, color, value }: Readonly<{ who: string; color: string; value: number }>) {
   return (
     <div className="rounded-2xl p-3" style={{ background: OEN.card }}>
-      <div className="flex items-center justify-between text-[11px]" style={{ color: OEN.muted }}>
+      <div className="flex items-center justify-between text-[12px]" style={{ color: OEN.muted }}>
         <span className="flex items-center gap-1.5">
           <span className="h-2 w-2 rounded-full" style={{ background: color }} />
           <span style={{ color: OEN.cream }}>{who}</span> · steps
         </span>
         <span>{Math.round(value / 100)}% of 10,000</span>
       </div>
-      <p className="mt-1 text-[24px] font-semibold tabular-nums tracking-tight" style={{ color: OEN.cream }}>
+      <p className="mt-1 text-[26px] font-semibold tabular-nums tracking-tight" style={{ color: OEN.cream }}>
         {value.toLocaleString("en-US")}
       </p>
       <div className="mt-1.5 h-1.5 overflow-hidden rounded-full" style={{ background: "#3d3a33" }}>
@@ -88,14 +88,14 @@ export function OenVisual() {
   return (
     <div ref={ref} className="relative flex h-full flex-col overflow-hidden p-5 sm:p-6" style={{ background: OEN.bg, color: OEN.cream }}>
       <div className="flex items-center justify-between">
-        <span className="text-[10px] uppercase tracking-[0.14em]" style={{ color: OEN.muted }}>
+        <span className="text-[11px] uppercase tracking-[0.14em]" style={{ color: OEN.muted }}>
           a little look inside
         </span>
-        <span className="rounded-full px-2 py-0.5 text-[10px]" style={{ background: OEN.card, color: OEN.muted }}>
+        <span className="rounded-full px-2 py-0.5 text-[11px]" style={{ background: OEN.card, color: OEN.muted }}>
           demo day
         </span>
       </div>
-      <p className="mt-2 text-[22px] font-semibold tracking-tight">
+      <p className="mt-2 text-[24px] font-semibold tracking-tight">
         Today, together<span style={{ color: mine.c }}>.</span>
       </p>
 
@@ -106,7 +106,7 @@ export function OenVisual() {
 
       <div className="mt-auto flex items-end justify-between gap-3 pt-3">
         <div>
-          <p className="text-[10px]" style={{ color: OEN.muted }}>
+          <p className="text-[11px]" style={{ color: OEN.muted }}>
             your colour · <span style={{ color: mine.c }}>{mine.name}</span>
           </p>
           <div className="mt-1.5 flex gap-1.5" role="radiogroup" aria-label="Pick your colour">
@@ -133,7 +133,7 @@ export function OenVisual() {
             e.stopPropagation();
             cheer();
           }}
-          className="relative rounded-full px-3.5 py-2 text-[12px] font-medium transition-transform active:scale-95"
+          className="relative rounded-full px-3.5 py-2 text-[13px] font-medium transition-transform active:scale-95"
           style={{ background: mine.c, color: OEN.bg }}
         >
           {sent ? `Cheer sent ♥ ${sent > 1 ? `×${sent}` : ""}` : "Send Alex a cheer ♥"}
@@ -144,7 +144,7 @@ export function OenVisual() {
         <span
           key={h.id}
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-12 text-[18px]"
+          className="pointer-events-none absolute bottom-12 text-[20px]"
           style={{
             left: `${h.x}%`,
             color: mine.c,
@@ -210,12 +210,12 @@ export function AdoraVisual() {
           <Heart className="h-[clamp(30px,6.5vw,42px)] w-[clamp(30px,6.5vw,42px)]" strokeWidth={2.4} aria-hidden="true" />
           <span className="text-[clamp(44px,10vw,64px)] font-semibold leading-none tracking-[-0.04em]">Adora</span>
         </span>
-        <p className="mt-3 text-[14px] text-white/85">
+        <p className="mt-3 text-[15.5px] text-white/85">
           Tech Lead<span className="mx-1.5 text-white/40">·</span>mobile, backend & ML
         </p>
       </div>
 
-      <span className="mono absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-white/10 px-2.5 py-1 text-[10px] text-white/80 backdrop-blur">
+      <span className="mono absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-white/10 px-2.5 py-1 text-[11px] text-white/80 backdrop-blur">
         oct 2023 — now
       </span>
     </div>

@@ -9,9 +9,9 @@ export const metadata: Metadata = { title: "About" };
 
 export default function AboutPage() {
   return (
-    <main className="mx-auto w-full max-w-[640px] px-5 pb-24 pt-24 sm:pt-28">
-      <h1 className="pixel rise text-[34px] leading-tight text-[var(--strong)]">Hi i&apos;m, <LongJ word={profile.name} />.</h1>
-      <p className="rise d1 mt-3 text-[15px] leading-[1.5]">
+    <main className="mx-auto w-full max-w-[700px] px-5 pb-24 pt-24 sm:pt-28">
+      <h1 className="pixel rise text-[38px] leading-tight text-[var(--strong)]">Hi i&apos;m, <LongJ word={profile.name} />.</h1>
+      <p className="rise d1 mt-3 text-[16.5px] leading-[1.5]">
         I&apos;m a <strong>software engineer</strong> with <strong>3 years at Adora</strong>, working across{" "}
         <strong>mobile</strong>, <strong>backend</strong> and <strong>AI</strong>. In my free time I&apos;m building{" "}
         <a className="link" href="https://oen-app.com" target="_blank" rel="noreferrer">Oen ↗</a>, a small app that
@@ -84,7 +84,7 @@ export default function AboutPage() {
             { x: 30, y: 44, r: -4, z: 4 },
           ]}
         />
-        <p className="mono -mt-4 text-center text-[11px] text-[var(--faint)]">pick them up</p>
+        <p className="mono -mt-4 text-center text-[12px] text-[var(--faint)]">pick them up</p>
       </div>
     </main>
   );

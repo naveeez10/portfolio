@@ -96,7 +96,7 @@ export function CommandMenu() {
   return (
     <div className="fixed inset-0 z-[70] flex items-start justify-center px-4 pt-[14vh]" role="dialog" aria-modal="true" aria-label="Command menu">
       <button type="button" aria-label="Close command menu" className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" onClick={close} />
-      <div className="rise relative w-full max-w-[520px] overflow-hidden rounded-xl border border-[var(--line-2)] bg-[var(--panel)] shadow-[var(--shadow)]">
+      <div className="rise relative w-full max-w-[560px] overflow-hidden rounded-xl border border-[var(--line-2)] bg-[var(--panel)] shadow-[var(--shadow)]">
         <div className="flex items-center gap-2 border-b border-[var(--line)] px-3.5">
           <Search className="h-4 w-4 text-[var(--faint)]" aria-hidden="true" />
           <input
@@ -121,9 +121,9 @@ export function CommandMenu() {
             }}
             placeholder="Type a command or search…"
             aria-label="Search commands"
-            className="h-12 w-full bg-transparent text-[15px] text-[var(--strong)] outline-none placeholder:text-[var(--faint)]"
+            className="h-12 w-full bg-transparent text-[16.5px] text-[var(--strong)] outline-none placeholder:text-[var(--faint)]"
           />
-          <kbd className="mono rounded border border-[var(--line-2)] px-1.5 text-[10px] text-[var(--faint)]">esc</kbd>
+          <kbd className="mono rounded border border-[var(--line-2)] px-1.5 text-[11px] text-[var(--faint)]">esc</kbd>
         </div>
         <ul ref={listRef} className="max-h-[50vh] overflow-y-auto p-1.5" role="listbox">
           {filtered.length === 0 ? <li className="px-3 py-6 text-center text-sm text-[var(--faint)]">Nothing matches “{query}”.</li> : null}
@@ -133,7 +133,7 @@ export function CommandMenu() {
             const selected = i === index;
             return (
               <li key={item.id} role="presentation">
-                {header ? <p className="label px-2.5 pb-1 pt-2.5 text-[10px]">{header}</p> : null}
+                {header ? <p className="label px-2.5 pb-1 pt-2.5 text-[11px]">{header}</p> : null}
                 <button
                   type="button"
                   role="option"

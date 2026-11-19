@@ -6,9 +6,9 @@ export const metadata: Metadata = { title: "Privacy", robots: { index: false } }
 /* Required by Google's OAuth consent screen for the Google Health integration that powers the "body" tile. */
 export default function PrivacyPage() {
   return (
-    <main className="mx-auto w-full max-w-[640px] px-5 pb-24 pt-24 sm:pt-28">
-      <h1 className="text-[28px] leading-tight text-[var(--strong)]">Privacy</h1>
-      <p className="mono mt-2 text-[12px] text-[var(--faint)]">last updated 20 nov 2026</p>
+    <main className="mx-auto w-full max-w-[700px] px-5 pb-24 pt-24 sm:pt-28">
+      <h1 className="text-[32px] leading-tight text-[var(--strong)]">Privacy</h1>
+      <p className="mono mt-2 text-[13px] text-[var(--faint)]">last updated 20 nov 2026</p>
 
       <div className="mt-8 space-y-5 leading-[1.6]">
         <p>

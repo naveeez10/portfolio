@@ -54,7 +54,7 @@ body {
   background-image: radial-gradient(var(--dot) 1px, transparent 1.5px);
   background-size: 24px 24px;
   color: var(--text);
-  font-size: 14px;
+  font-size: 15.5px;
   line-height: 1.55;
 }
 
@@ -70,12 +70,12 @@ strong { font-weight: 400; color: var(--strong); }
 
 .mono {
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .label {
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--faint);

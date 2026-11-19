@@ -7,7 +7,7 @@ type Photo = { src: string; caption: string };
 type Spot = { x: number; y: number; r: number; z: number };
 
 /** Polaroids you can pick up and drop. Positions are percentages of the pile area. */
-export function PolaroidPile({ photos, layout, height = 380, width = "w-[42%] max-w-[210px]" }: Readonly<{ photos: readonly Photo[]; layout: Spot[]; height?: number; width?: string }>) {
+export function PolaroidPile({ photos, layout, height = 380, width = "w-[42%] max-w-[230px]" }: Readonly<{ photos: readonly Photo[]; layout: Spot[]; height?: number; width?: string }>) {
   const area = useRef<HTMLDivElement>(null);
   const [spots, setSpots] = useState(layout);
   const [active, setActive] = useState<number | null>(null);
@@ -83,7 +83,7 @@ export function PolaroidPile({ photos, layout, height = 380, width = "w-[42%] ma
             <span className="relative block aspect-[4/3.2] overflow-hidden rounded-[2px] bg-[var(--panel-2)]">
               <Image src={p.src} alt={p.caption} fill sizes="220px" draggable={false} className="pointer-events-none object-cover" />
             </span>
-            <figcaption className="pixel absolute inset-x-0 bottom-1.5 text-center text-[13px] text-[#111214]">{p.caption}</figcaption>
+            <figcaption className="pixel absolute inset-x-0 bottom-1.5 text-center text-[14.5px] text-[#111214]">{p.caption}</figcaption>
           </figure>
         );
       })}
